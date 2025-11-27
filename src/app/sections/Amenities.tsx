@@ -1,98 +1,107 @@
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import {
-  Car,
-  Tv,
-  Waves,
   Wifi,
+  Tv,
+  Car,
+  Waves,
   Wind,
   Shield,
   ChefHat,
-  Heater,
+  Flame,
 } from "lucide-react";
-import { ReactNode } from "react";
-
-interface Amenities {
-  id: number;
-  icon: ReactNode;
-  name: string;
-  description: string;
-}
+import { Card, CardContent } from "../components/ui/card";
 
 export default function Amenities() {
-  const amenities: Amenities[] = [
+  const amenities = [
     {
       id: 1,
-      icon: <Wifi />,
+      Icon: Wifi,
       name: "WIFI gratuito",
       description: "Internet de alta velocidade em toda a casa.",
     },
     {
       id: 2,
-      icon: <Tv />,
+      Icon: Tv,
       name: "Smart TV",
       description: "Diversos canais e Netflix para entretenimento em família.",
     },
     {
       id: 3,
-      icon: <Car />,
+      Icon: Car,
       name: "Estacionamento",
-      description: " 3 vagas privativas e segura no local.",
+      description: "3 vagas privativas e segura no local.",
     },
     {
       id: 4,
-      icon: <Waves />,
+      Icon: Waves,
       name: "Piscina privativa",
       description: "Piscina com cascata e LED exclusiva.",
     },
     {
       id: 5,
-      icon: <ChefHat />,
+      Icon: ChefHat,
       name: "Cozinha completa",
       description: "Tudo o que você precisa para preparar suas refeições.",
     },
     {
       id: 6,
-      icon: <Wind />,
+      Icon: Wind,
       name: "Ventiladores",
       description: "Ventiladores nos quartos.",
     },
     {
       id: 7,
-      icon: <Shield />,
+      Icon: Shield,
       name: "Segurança 24h",
       description:
         "Sistema de monitoramento com câmeras de segurança externa e cerca elétrica.",
     },
     {
       id: 8,
-      icon: <Heater />,
+      Icon: Flame,
       name: "Churrasqueira",
       description: "Área gourmet com churrasqueira",
     },
   ];
 
   return (
-    <div className="bg-white max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <h2 className="text-3xl font-bold text-center text-gray-900 m-12">
-        Comodidades
-      </h2>
-      <div className="grid grid-cols-4 gap-8 w-full">
-        {amenities.map((item) => (
-          <div key={item.id} className="flex items-start gap-4">
-            <Card className="!border-0 shadow-none">
-              <CardContent className="text-center">
-                <div className="w-16 h-16 rounded-full bg-blue-100 mx-auto justify-center flex items-center mb-4">
-                  <span className="text-blue-600">{item.icon}</span>
-                </div>
-                <p className="font-semibold text-gray-900 mb-2 capitalize">
-                  {item.name}
-                </p>
-                <p className="text-gray-600 text-sm">{item.description}</p>
-              </CardContent>
-            </Card>
-          </div>
-        ))}
+    <section className="py-20 px-4 sm:px-6 lg:px-8 bg-gray-50">
+      <div className="max-w-7xl mx-auto">
+        <div className="text-center mb-16">
+          <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-4 font-serif">
+            Comodidades
+          </h2>
+          <div className="w-24 h-1 bg-gradient-ocean mx-auto rounded-full" />
+        </div>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          {amenities.map((item) => {
+            const Icon = item.Icon;
+            return (
+              <Card
+                key={item.id}
+                className="border-0 shadow-sm bg-white hover:shadow-md rounded-xl group relative overflow-hidden  backdrop-blur-sm hover:shadow-glow transition-all duration-500 hover:-translate-y-2 cursor-default"
+              >
+                <div className="absolute inset-0 bg-gradient-ocean opacity-0 group-hover:opacity-5 transition-opacity duration-500" />
+
+                <CardContent className="pt-8 pb-6 px-6 text-center relative">
+                  <div className="w-20 h-20 rounded-2xl bg-gradient-ocean mx-auto flex items-center justify-center mb-6 shadow-soft group-hover:scale-110 group-hover:rotate-3 transition-transform duration-500">
+                    <span className="text-primary-foreground">
+                      <Icon className="text-white" size={30} />
+                    </span>
+                  </div>
+
+                  <h3 className="font-semibold text-lg text-foreground mb-3 group-hover:text-primary transition-colors duration-300">
+                    {item.name}
+                  </h3>
+
+                  <p className="text-muted-foreground text-sm leading-relaxed">
+                    {item.description}
+                  </p>
+                </CardContent>
+              </Card>
+            );
+          })}
+        </div>
       </div>
-    </div>
+    </section>
   );
 }
