@@ -1,5 +1,6 @@
+"use client";
+
 import {
-  Calendar,
   Users,
   Home,
   ChevronRight,
@@ -8,6 +9,7 @@ import {
   Plus,
   Minus,
 } from "lucide-react";
+import { Calendar } from "./ui/calendar";
 import {
   Select,
   SelectContent,
@@ -21,10 +23,21 @@ import { Label } from "./ui/label";
 import { Popover, PopoverContent, PopoverTrigger } from "./ui/popover";
 import { useState } from "react";
 import { ButtonRounded } from "./ButtonRounded";
+import { ptBR } from "date-fns/locale";
+import type { DateRange } from "react-day-picker";
+import { useQuery } from "@tanstack/react-query";
+
+interface Booking {
+  start: Date;
+  end: Date;
+  summary?: string;
+}
 
 const BookingWidget = () => {
-  const [open, setOpen] = useState(false);
-  const [date, setDate] = useState<Date | undefined>(undefined);
+  const [checkInOpen, setCheckInOpen] = useState(false);
+  const [checkOutOpen, setCheckOutOpen] = useState(false);
+  const [checkInDate, setCheckInDate] = useState<Date | undefined>(undefined);
+  const [checkOutDate, setCheckOutDate] = useState<Date | undefined>(undefined);
   const [guests, setGuests] = useState({
     adultos: 0,
     criancas: 0,
@@ -32,116 +45,202 @@ const BookingWidget = () => {
   });
   const [animals, setAnimals] = useState(0);
   const [guestsPopoverOpen, setGuestsPopoverOpen] = useState(false);
-  const totalGuests = guests.adultos + guests.criancas + guests.bebes;
+  const totalGuests = guests.adultos + guests.criancas;
+
+  // Buscar reservas do Airbnb usando TanStack Query
+  const {
+    data: bookings = [],
+    isLoading: loadingBookings,
+    error: bookingsError,
+  } = useQuery<Booking[]>({
+    queryKey: ["airbnb-calendar"],
+    queryFn: async () => {
+      const response = await fetch("/api/airbnb-calendar");
+
+      if (!response.ok) {
+        throw new Error(`Erro ${response.status}: ${response.statusText}`);
+      }
+
+      const data = await response.json();
+
+      // Verificar se há erro na resposta
+      if (data.error) {
+        throw new Error(data.error);
+      }
+
+      // Converter strings de data para objetos Date
+      const processedBookings: Booking[] = data
+        .filter((booking: any) => booking.start && booking.end)
+        .map((booking: any) => {
+          const start = new Date(booking.start);
+          const end = new Date(booking.end);
+
+          // Validar se as datas são válidas
+          if (isNaN(start.getTime()) || isNaN(end.getTime())) {
+            return null;
+          }
+
+          return {
+            start,
+            end,
+            summary: booking.summary || "",
+          };
+        })
+        .filter((booking: Booking | null) => booking !== null) as Booking[];
+
+      return processedBookings;
+    },
+    staleTime: 60 * 1000, // 1 minuto
+    refetchOnWindowFocus: false,
+  });
+
+  // Log de erros (opcional, para debug)
+  if (bookingsError) {
+    console.error("Erro ao buscar reservas:", bookingsError);
+  }
+
+  // Função para verificar se uma data está ocupada
+  const isDateBooked = (date: Date): boolean => {
+    if (bookings.length === 0) return false;
+
+    const dateToCheck = new Date(date);
+    dateToCheck.setHours(0, 0, 0, 0);
+
+    return bookings.some((booking) => {
+      const bookingStart = new Date(booking.start);
+      bookingStart.setHours(0, 0, 0, 0);
+
+      const bookingEnd = new Date(booking.end);
+      bookingEnd.setHours(0, 0, 0, 0);
+
+      // Verifica se a data está dentro do intervalo de reserva
+      // Inclui o dia de check-in e exclui o dia de check-out (check-out libera o dia)
+      return dateToCheck >= bookingStart && dateToCheck < bookingEnd;
+    });
+  };
+
+  // Função para desabilitar datas ocupadas e datas passadas
+  const disabledDates = (date: Date): boolean => {
+    // Desabilita datas anteriores à data atual
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+
+    const dateToCheck = new Date(date);
+    dateToCheck.setHours(0, 0, 0, 0);
+
+    // Retorna true se a data for anterior a hoje ou se estiver ocupada
+    return dateToCheck < today || isDateBooked(date);
+  };
 
   return (
-    <div className="w-full max-w-7xl mx-auto px-8">
-      <div className="bg-[hsl(var(--glass-bg))]/80 backdrop-blur-md rounded-lg p-8 border border-white/10">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-6 items-end">
+    <div className="w-full max-w-8xl mx-auto px-10">
+      <div className="bg-[hsl(var(--glass-bg))]/80 backdrop-blur-md rounded-lg px-20 py-10 border border-white/10">
+        <div className="flex flex-col md:flex-row gap-15 items-end">
           <div className="flex gap-4 ">
-            <div className="flex flex-col gap-3">
+            <div className="flex flex-col gap-3 border-b border-white/20 ">
               <Label
                 htmlFor="date-picker"
-                className="px-1 text-white/70 text-md uppercase tracking-widest font-light"
+                className="text-white/70 text-md uppercase tracking-widest font-light"
               >
-                Data check-in
+                Data
               </Label>
-              <Popover open={open} onOpenChange={setOpen}>
+              <Popover open={checkOutOpen} onOpenChange={setCheckOutOpen}>
                 <PopoverTrigger asChild>
                   <Button
                     variant="outline"
-                    id="date-picker"
-                    className="w-32 justify-between font-normal bg-transparent border-white/20 text-white/70"
+                    id="checkout-date-picker"
+                    className="w-60 justify-between font-normal bg-transparent border-none shadow-none text-white/70 !p-0 cursor-pointer "
                   >
-                    {date ? date.toLocaleDateString() : "Select date"}
-                    <ChevronUpIcon />
-                  </Button>
-                </PopoverTrigger>
-                <PopoverContent
-                  className="w-auto overflow-hidden p-0"
-                  align="start"
-                >
-                  <Calendar
-                    mode="single"
-                    selected={date}
-                    captionLayout="dropdown"
-                    onSelect={(date) => {
-                      setDate(date);
-                      setOpen(false);
-                    }}
-                  />
-                </PopoverContent>
-              </Popover>
-            </div>
-            <div className="flex flex-col gap-3">
-              <Label
-                htmlFor="time-picker"
-                className="px-1 text-white/70 text-md uppercase tracking-widest font-light"
-              >
-                Horário
-              </Label>
-              <Input
-                type="time"
-                id="time-picker"
-                step="1"
-                defaultValue="10:30:00"
-                className="bg-transparent border-white/20 appearance-none [&::-webkit-calendar-picker-indicator]:hidden [&::-webkit-calendar-picker-indicator]:appearance-none text-white/70"
-              />
-            </div>
-          </div>
-          <div className="flex gap-4 ">
-            <div className="flex flex-col gap-3">
-              <Label
-                htmlFor="date-picker"
-                className="px-1 text-white/70 text-md uppercase tracking-widest font-light"
-              >
-                Data check-out
-              </Label>
-              <Popover open={open} onOpenChange={setOpen}>
-                <PopoverTrigger asChild>
-                  <Button
-                    variant="outline"
-                    id="date-picker"
-                    className="w-32 justify-between font-normal bg-transparent border-white/20 text-white/70"
-                  >
-                    {date ? date.toLocaleDateString() : "Select date"}
+                    {checkInDate && checkOutDate
+                      ? `${checkInDate.toLocaleDateString("pt-BR")} - ${checkOutDate.toLocaleDateString("pt-BR")}`
+                      : checkInDate
+                        ? `${checkInDate.toLocaleDateString("pt-BR")} - Selecione a data de saída`
+                        : "Selecione as datas"}
                     <ChevronDownIcon />
                   </Button>
                 </PopoverTrigger>
                 <PopoverContent
-                  className="w-auto overflow-hidden p-0"
-                  align="start"
+                  className="w-auto bg-[#03303E]/70 backdrop-blur-xl border-white/30 !rounded-lg shadow-2xl mb-19 text-white justify-center items-center"
+                  align="end"
+                  onOpenAutoFocus={(e) => e.preventDefault()}
                 >
                   <Calendar
-                    mode="single"
-                    selected={date}
-                    captionLayout="dropdown"
-                    onSelect={(date) => {
-                      setDate(date);
-                      setOpen(false);
+                    key={`${checkInDate?.getTime()}-${checkOutDate?.getTime()}`}
+                    mode="range"
+                    locale={ptBR}
+                    selected={
+                      checkInDate || checkOutDate
+                        ? {
+                            from: checkInDate,
+                            to: checkOutDate,
+                          }
+                        : undefined
+                    }
+                    disabled={disabledDates}
+                    modifiers={{
+                      booked: (date) => isDateBooked(date),
+                    }}
+                    modifiersClassNames={{
+                      booked:
+                        "opacity-40 line-through cursor-not-allowed text-red-300/50",
+                    }}
+                    classNames={{
+                      day_disabled:
+                        "opacity-40 line-through cursor-not-allowed text-red-300",
+                    }}
+                    className="w-70 cursor-pointer"
+                    captionLayout="label"
+                    onSelect={(range: DateRange | undefined) => {
+                      if (range) {
+                        const today = new Date();
+                        today.setHours(0, 0, 0, 0);
+
+                        // Valida se as datas selecionadas não são anteriores a hoje
+                        if (range.from) {
+                          const fromDate = new Date(range.from);
+                          fromDate.setHours(0, 0, 0, 0);
+                          if (fromDate < today) {
+                            return; // Não permite selecionar data passada
+                          }
+                          if (isDateBooked(range.from)) {
+                            return; // Não permite selecionar data ocupada
+                          }
+                        }
+
+                        if (range.to) {
+                          const toDate = new Date(range.to);
+                          toDate.setHours(0, 0, 0, 0);
+                          if (toDate < today) {
+                            return; // Não permite selecionar data passada
+                          }
+                          if (isDateBooked(range.to)) {
+                            return; // Não permite selecionar data ocupada
+                          }
+                        }
+
+                        // Atualiza as datas conforme o range selecionado
+                        setCheckInDate(range.from);
+                        setCheckOutDate(range.to ?? undefined);
+                        // Fecha o popover apenas quando ambas as datas estiverem selecionadas
+                        if (range.from && range.to) {
+                          // Pequeno delay para garantir que o estado foi atualizado
+                          setTimeout(() => {
+                            setCheckOutOpen(false);
+                          }, 100);
+                        }
+                      } else {
+                        // Se range for undefined, limpa ambas as datas
+                        setCheckInDate(undefined);
+                        setCheckOutDate(undefined);
+                      }
                     }}
                   />
                 </PopoverContent>
               </Popover>
             </div>
-            <div className="flex flex-col gap-3">
-              <Label
-                htmlFor="time-picker"
-                className="px-1 text-white/70 text-md uppercase tracking-widest font-light"
-              >
-                Horário
-              </Label>
-              <Input
-                type="time"
-                id="time-picker"
-                step="1"
-                defaultValue="10:30:00"
-                className="bg-transparent border-white/20 appearance-none [&::-webkit-calendar-picker-indicator]:hidden [&::-webkit-calendar-picker-indicator]:appearance-none text-white/70"
-              />
-            </div>
           </div>
 
-          <div className="space-y-2">
+          <div className="space-y-2 border-b border-white/20 ">
             <Label className="text-white/70 text-md uppercase tracking-widest font-light">
               Hóspedes
             </Label>
@@ -153,7 +252,7 @@ const BookingWidget = () => {
               <PopoverTrigger asChild>
                 <Button
                   variant="outline"
-                  className="w-full justify-between font-normal bg-transparent border-white/20 text-white/70 hover:bg-white/10"
+                  className="w-60 justify-between font-normal bg-transparent border-none shadow-none text-white/70 cursor-pointer !p-0"
                 >
                   <div className="flex items-center gap-2">
                     <Users className="h-4 w-4" />
@@ -163,10 +262,10 @@ const BookingWidget = () => {
                         : `${guests.adultos + guests.criancas} hóspede${guests.adultos + guests.criancas > 1 ? "s" : ""}`}
                     </span>
                   </div>
-                  <ChevronUpIcon className="h-4 w-4" />
+                  <ChevronDownIcon className="h-4 w-4" />
                 </Button>
               </PopoverTrigger>
-              <PopoverContent className="w-80 bg-[#03303E]/70 backdrop-blur-xl border-white/30 !rounded-2xl shadow-2xl">
+              <PopoverContent className="w-80 bg-[#03303E]/70 backdrop-blur-xl border-white/30 !rounded-lg shadow-2xl mb-19">
                 <div className="space-y-5">
                   <div className="space-y-5">
                     {/* Adultos */}
@@ -303,7 +402,7 @@ const BookingWidget = () => {
                     </div>
                   </div>
                   <div className="bg-white/10 h-[1px] w-full" />
-                  <Button className="w-full bg-transparent text-white border-0 hover:bg-white/90 h-11 hover:text-black font-light tracking-wider uppercase text-sm cursor-pointer">
+                  <Button className="w-full  text-black border-0 bg-white/90 h-11 hover:text-black hover:bg-white/50 font-light tracking-wider uppercase text-sm cursor-pointer">
                     Confirmar
                   </Button>
                 </div>
@@ -311,7 +410,7 @@ const BookingWidget = () => {
             </Popover>
           </div>
 
-          <Button className="bg-transparent text-white border-0 hover:bg-white/90 h-11 hover:text-black font-light tracking-wider uppercase text-sm cursor-pointer">
+          <Button className="w-full md:w-60 sm:w-auto  text-black border-0 bg-white/90 hover:bg-white/50 h-11 hover:text-black font-light tracking-wider uppercase text-sm cursor-pointer">
             Reserva
             <ChevronRight className="h-4 w-4 ml-2" />
           </Button>

@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Navigation from "./components/Navigation";
 import { Poppins } from "next/font/google";
 import "./globals.css";
+import { QueryProvider } from "./providers/QueryProvider";
 
 const poppins = Poppins({
   variable: "--font-poppins",
@@ -22,8 +23,10 @@ export default function RootLayout({
   return (
     <html lang="pt-br">
       <body className={`${poppins.variable} antialiased`}>
-        <Navigation />
-        {children}
+        <QueryProvider>
+          <Navigation />
+          {children}
+        </QueryProvider>
       </body>
     </html>
   );

@@ -28,7 +28,12 @@
 body {
   font-optical-sizing: auto;
   font-style: normal;
-  background-color: #003847;
+  background: 
+    linear-gradient(
+      rgba(0, 0, 0, 0) 0%,
+      rgba(0, 0, 0, 0.35) 100%
+    ),
+    #002b36; /* sua cor base aqui */
 }
 
 @layer base {

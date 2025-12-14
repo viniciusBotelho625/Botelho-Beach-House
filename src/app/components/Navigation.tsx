@@ -33,10 +33,6 @@ const Navigation = () => {
           <button className="text-white/90 hover:text-white text-sm font-light tracking-wider uppercase transition-colors">
             Contatos
           </button>
-          <button className="flex items-center gap-2 text-white/90 hover:text-white text-sm font-light tracking-wider uppercase transition-colors">
-            Reserva
-            <ChevronRight className="h-4 w-4" />
-          </button>
         </div>
       </div>
     </nav>
