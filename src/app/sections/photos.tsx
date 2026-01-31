@@ -8,9 +8,9 @@ const allCards = [
     id: 1,
     content: (
       <div>
-        <p className="font-bold text-2xl text-white">Piscina Principal</p>
+        <p className="font-bold text-2xl text-white">Piscina</p>
         <p className="font-normal text-sm text-white/80 mt-2">
-          Piscina moderna de 5 metros com 1,40m de profundidade
+          Piscina moderna de 5 metros de comprimento e 2,30m de largura com 1,40m de profundidade
         </p>
       </div>
     ),
@@ -18,8 +18,23 @@ const allCards = [
     thumbnail:
       "https://res.cloudinary.com/dmeglebnu/image/upload/v1769216812/IMG_1612_1_qhprv6.jpg",
   },
+  
   {
     id: 2,
+    content: (
+      <div>
+        <p className="font-bold text-xl text-white">Decoração</p>
+        <p className="font-normal text-sm text-white/80 mt-2">
+        Piscina com jardim artificial e iluminação LED RGB para fotos incríveis.
+        </p>
+      </div>
+    ),
+    className: "col-span-1 h-[450px]",
+    thumbnail:
+       "https://res.cloudinary.com/dmeglebnu/image/upload/v1769216809/IMG_5910_gpu4ha.jpg",
+  },
+  {
+    id: 3,
     content: (
       <div>
         <p className="font-bold text-xl text-white">Área Externa</p>
@@ -30,21 +45,7 @@ const allCards = [
     ),
     className: "col-span-1 h-[450px]",
     thumbnail:
-      "https://res.cloudinary.com/dmeglebnu/image/upload/v1769216809/IMG_5910_gpu4ha.jpg",
-  },
-  {
-    id: 3,
-    content: (
-      <div>
-        <p className="font-bold text-xl text-white">Jardim</p>
-        <p className="font-normal text-sm text-white/80 mt-2">
-          Espaço verde e aconchegante
-        </p>
-      </div>
-    ),
-    className: "col-span-1 h-[450px]",
-    thumbnail:
-      "https://res.cloudinary.com/dmeglebnu/image/upload/v1769216809/7c7435c9-20a5-40ac-8ad4-e28a775b1954_jh50v7.jpg",
+    "https://res.cloudinary.com/dmeglebnu/image/upload/v1769216809/7c7435c9-20a5-40ac-8ad4-e28a775b1954_jh50v7.jpg",
   },
   {
     id: 4,
@@ -52,7 +53,7 @@ const allCards = [
       <div>
         <p className="font-bold text-xl text-white">Vista Lateral</p>
         <p className="font-normal text-sm text-white/80 mt-2">
-          Arquitetura moderna
+          Casa de esquina equipada com cerca elétrica e câmeras de segurança.
         </p>
       </div>
     ),
@@ -64,9 +65,23 @@ const allCards = [
     id: 5,
     content: (
       <div>
-        <p className="font-bold text-xl text-white">Interior</p>
+        <p className="font-bold text-xl text-white">Garagem</p>
         <p className="font-normal text-sm text-white/80 mt-2">
-          Ambiente aconchegante
+          Garagem com 3 vagas privativas e segura no local.
+        </p>
+      </div>
+    ),
+    className: "col-span-1 h-[450px]",
+    thumbnail:
+      "https://res.cloudinary.com/dmeglebnu/image/upload/v1769216810/IMG_3338_erzmzi.jpg",
+  },
+  {
+    id: 6,
+    content: (
+      <div>
+        <p className="font-bold text-xl text-white">Sala de Estar</p>
+        <p className="font-normal text-sm text-white/80 mt-2">
+          Sala de estar com Smart TV 50" e sofá cama para 2 pessoas.
         </p>
       </div>
     ),
@@ -75,32 +90,60 @@ const allCards = [
       "https://res.cloudinary.com/dmeglebnu/image/upload/v1769216810/IMG_3345_1_z1p1ir.jpg",
   },
   {
-    id: 6,
-    content: (
-      <div>
-        <p className="font-bold text-xl text-white">Quarto Principal</p>
-        <p className="font-normal text-sm text-white/80 mt-2">
-          Conforto e elegância
-        </p>
-      </div>
-    ),
-    className: "col-span-1 h-[450px]",
-    thumbnail:
-      "https://res.cloudinary.com/dmeglebnu/image/upload/v1769216812/IMG_1612_1_qhprv6.jpg",
-  },
-  {
     id: 7,
     content: (
       <div>
-        <p className="font-bold text-xl text-white">Sala de Estar</p>
+        <p className="font-bold text-xl text-white">Espaço Gourmet</p>
         <p className="font-normal text-sm text-white/80 mt-2">
-          Espaço para relaxar
+          Espaço gourmet com churrasqueira e área de lazer para relaxar.
         </p>
       </div>
     ),
     className: "md:col-span-1 h-[450px]",
     thumbnail:
-      "https://res.cloudinary.com/dmeglebnu/image/upload/v1769216809/IMG_5910_gpu4ha.jpg",
+      "https://res.cloudinary.com/dmeglebnu/image/upload/v1769216813/IMG_0245_mmrvik.jpg",
+  },
+  {
+    id: 8,
+    content: (
+      <div>
+        <p className="font-bold text-xl text-white">Cozinha</p>
+        <p className="font-normal text-sm text-white/80 mt-2">
+          Cozinha com geladeira, cooktop e utensílios de cozinha para preparação de refeições.
+        </p>
+      </div>
+    ),
+    className: "col-span-1 h-[450px]",
+    thumbnail:
+      "https://res.cloudinary.com/dmeglebnu/image/upload/v1769216812/IMG_0663_gtlseo.jpg",
+  },
+  {
+    id: 9,
+    content: (
+      <div>
+        <p className="font-bold text-xl text-white">Banheiros</p>
+        <p className="font-normal text-sm text-white/80 mt-2">
+          Casa com 2 banheiros e 1 lavabo, equipados com água quente e chuveiro elétrico. 
+        </p>
+      </div>
+    ),
+    className: "col-span-1 h-[450px]",
+    thumbnail:
+      "https://res.cloudinary.com/dmeglebnu/image/upload/v1769216811/IMG_0292_u4fshf.jpg",
+  },
+  {
+    id: 10,
+    content: (
+      <div>
+        <p className="font-bold text-xl text-white">Quarto 1</p>
+        <p className="font-normal text-sm text-white/80 mt-2">
+          Quarto 1 com 2 camas de solteiro e 1 cama de casal, equipado com ar condicionado e TV 32".
+        </p>
+      </div>
+    ),
+    className: "md:col-span-1 h-[450px]",
+    thumbnail:
+      "https://res.cloudinary.com/dmeglebnu/image/upload/v1769216812/IMG_3195_xaddl9.jpg",
   },
 ];
 
