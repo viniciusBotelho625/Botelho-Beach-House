@@ -1,7 +1,7 @@
 "use client";
 
-import { useState } from "react";
-import { Plus } from "lucide-react";
+import { AnimatedTestimonials } from "../components/ui/animated-testimonials";
+import { cloudinaryOptimize } from "@/lib/utils";
 
 const allCards = [
   {
@@ -14,7 +14,6 @@ const allCards = [
         </p>
       </div>
     ),
-    className: "md:col-span-2 h-[450px]",
     thumbnail:
       "https://res.cloudinary.com/dmeglebnu/image/upload/v1769216812/IMG_1612_1_qhprv6.jpg",
   },
@@ -29,7 +28,6 @@ const allCards = [
         </p>
       </div>
     ),
-    className: "col-span-1 h-[450px]",
     thumbnail:
        "https://res.cloudinary.com/dmeglebnu/image/upload/v1769216809/IMG_5910_gpu4ha.jpg",
   },
@@ -43,7 +41,6 @@ const allCards = [
         </p>
       </div>
     ),
-    className: "col-span-1 h-[450px]",
     thumbnail:
     "https://res.cloudinary.com/dmeglebnu/image/upload/v1769216809/7c7435c9-20a5-40ac-8ad4-e28a775b1954_jh50v7.jpg",
   },
@@ -57,7 +54,6 @@ const allCards = [
         </p>
       </div>
     ),
-    className: "md:col-span-2 h-[450px]",
     thumbnail:
       "https://res.cloudinary.com/dmeglebnu/image/upload/v1769216811/IMG_7277_gtecis.jpg",
   },
@@ -71,7 +67,6 @@ const allCards = [
         </p>
       </div>
     ),
-    className: "col-span-1 h-[450px]",
     thumbnail:
       "https://res.cloudinary.com/dmeglebnu/image/upload/v1769216810/IMG_3338_erzmzi.jpg",
   },
@@ -85,7 +80,6 @@ const allCards = [
         </p>
       </div>
     ),
-    className: "col-span-1 h-[450px]",
     thumbnail:
       "https://res.cloudinary.com/dmeglebnu/image/upload/v1769216810/IMG_3345_1_z1p1ir.jpg",
   },
@@ -99,7 +93,6 @@ const allCards = [
         </p>
       </div>
     ),
-    className: "md:col-span-1 h-[450px]",
     thumbnail:
       "https://res.cloudinary.com/dmeglebnu/image/upload/v1769216813/IMG_0245_mmrvik.jpg",
   },
@@ -113,7 +106,6 @@ const allCards = [
         </p>
       </div>
     ),
-    className: "col-span-1 h-[450px]",
     thumbnail:
       "https://res.cloudinary.com/dmeglebnu/image/upload/v1769216812/IMG_0663_gtlseo.jpg",
   },
@@ -127,7 +119,6 @@ const allCards = [
         </p>
       </div>
     ),
-    className: "col-span-1 h-[450px]",
     thumbnail:
       "https://res.cloudinary.com/dmeglebnu/image/upload/v1769216811/IMG_0292_u4fshf.jpg",
   },
@@ -137,22 +128,16 @@ const allCards = [
       <div>
         <p className="font-bold text-xl text-white">Quarto 1</p>
         <p className="font-normal text-sm text-white/80 mt-2">
-          Quarto 1 com 2 camas de solteiro e 1 cama de casal, equipado com ar condicionado e TV 32".
+          Quarto 1 suite com 2 camas de solteiro e 1 cama de casal, equipado com ventilador de teto".
         </p>
       </div>
     ),
-    className: "md:col-span-1 h-[450px]",
     thumbnail:
       "https://res.cloudinary.com/dmeglebnu/image/upload/v1769216812/IMG_3195_xaddl9.jpg",
   },
 ];
 
 export function Photos() {
-  const [showAll, setShowAll] = useState(false);
-  
-  const displayCards = showAll ? allCards : allCards.slice(0, 4);
-  const remainingCount = allCards.length - 4;
-
   return (
     <div className="min-h-screen py-20 w-full bg-gray-100">
       <div className="max-w-7xl mx-auto px-4">
@@ -169,48 +154,23 @@ export function Photos() {
           </p>
         </div>
         
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 max-w-7xl mx-auto">
-          {displayCards.map((card, i) => (
-            <div key={card.id} className={card.className}>
-              <div className="relative overflow-hidden rounded-xl h-full group cursor-pointer">
-                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent z-10" />
-                <img
-                  src={card.thumbnail}
-                  alt={`Photo ${card.id}`}
-                  className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
-                />
-                <div className="absolute bottom-0 left-0 right-0 p-6 z-20">
-                  {card.content}
-                </div>
-              </div>
-            </div>
-          ))}
-          
-          {/* Show More Button Card */}
-          {!showAll && remainingCount > 0 && (
-            <div className="col-span-1 h-[450px]">
-              <button
-                onClick={() => setShowAll(true)}
-                className="relative overflow-hidden rounded-xl h-full w-full group cursor-pointer"
-              >
-                <div className="absolute inset-0">
-                  <img
-                    src={allCards[4].thumbnail}
-                    alt="More photos"
-                    className="w-full h-full object-cover blur-sm scale-110 opacity-40"
-                  />
-                </div>
-                <div className="absolute inset-0 bg-black/60 z-10" />
-                <div className="absolute inset-0 z-20 flex flex-col items-center justify-center text-white">
-                  <div className="w-20 h-20 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
-                    <Plus className="w-10 h-10" />
-                  </div>
-                  <p className="text-2xl font-bold">{remainingCount}+ Fotos</p>
-                  <p className="text-sm mt-2 opacity-90">Ver todas as fotos</p>
-                </div>
-              </button>
-            </div>
-          )}
+        {/* Galeria Animada com Todas as Fotos */}
+        <div className="mt-8">
+          <AnimatedTestimonials
+            testimonials={allCards.map((card) => {
+              // Extrair texto do content
+              const contentText = card.content.props.children[1]?.props?.children || '';
+              const titleText = card.content.props.children[0]?.props?.children || 'Ambiente';
+              
+                return {
+                  name: titleText,
+                  designation: "Botelho Beach House",
+                  quote: contentText,
+                  src: cloudinaryOptimize(card.thumbnail),
+                };
+            })}
+            autoplay={true}
+          />
         </div>
       </div>
     </div>

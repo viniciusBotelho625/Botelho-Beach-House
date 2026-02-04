@@ -454,13 +454,14 @@ class App {
 
   isDown: boolean = false;
   start: number = 0;
+  paused: boolean = false;
 
   constructor(
     container: HTMLElement,
     {
       items,
       bend = 1,
-      textColor = "#ffffff",
+      textColor = "",
       borderRadius = 0,
       font = "bold 30px Figtree",
       scrollSpeed = 2,
@@ -517,57 +518,8 @@ class App {
     borderRadius: number,
     font: string
   ) {
-    const defaultItems = [
-      {
-        image: `https://picsum.photos/seed/1/800/600?grayscale`,
-        text: "Bridge",
-      },
-      {
-        image: `https://picsum.photos/seed/2/800/600?grayscale`,
-        text: "Desk Setup",
-      },
-      {
-        image: `https://picsum.photos/seed/3/800/600?grayscale`,
-        text: "Waterfall",
-      },
-      {
-        image: `https://picsum.photos/seed/4/800/600?grayscale`,
-        text: "Strawberries",
-      },
-      {
-        image: `https://picsum.photos/seed/5/800/600?grayscale`,
-        text: "Deep Diving",
-      },
-      {
-        image: `https://picsum.photos/seed/16/800/600?grayscale`,
-        text: "Train Track",
-      },
-      {
-        image: `https://picsum.photos/seed/17/800/600?grayscale`,
-        text: "Santorini",
-      },
-      {
-        image: `https://picsum.photos/seed/8/800/600?grayscale`,
-        text: "Blurry Lights",
-      },
-      {
-        image: `https://picsum.photos/seed/9/800/600?grayscale`,
-        text: "New York",
-      },
-      {
-        image: `https://picsum.photos/seed/10/800/600?grayscale`,
-        text: "Good Boy",
-      },
-      {
-        image: `https://picsum.photos/seed/21/800/600?grayscale`,
-        text: "Coastline",
-      },
-      {
-        image: `https://picsum.photos/seed/12/800/600?grayscale`,
-        text: "Palm Trees",
-      },
-    ];
-    const galleryItems = items && items.length ? items : defaultItems;
+ 
+    const galleryItems = items && items.length ? items : [];
     this.mediasImages = galleryItems.concat(galleryItems);
     this.medias = this.mediasImages.map((data, index) => {
       return new Media({
@@ -647,6 +599,7 @@ class App {
   }
 
   update() {
+    if (this.paused) return;
     this.scroll.current = lerp(
       this.scroll.current,
       this.scroll.target,
@@ -659,6 +612,19 @@ class App {
     this.renderer.render({ scene: this.scene, camera: this.camera });
     this.scroll.last = this.scroll.current;
     this.raf = window.requestAnimationFrame(this.update.bind(this));
+  }
+
+  pause() {
+    this.paused = true;
+    if (this.raf) {
+      window.cancelAnimationFrame(this.raf);
+      this.raf = 0;
+    }
+  }
+
+  resume() {
+    this.paused = false;
+    this.update();
   }
 
   addEventListeners() {
@@ -721,6 +687,8 @@ export default function CircularGallery({
   scrollEase = 0.05,
 }: CircularGalleryProps) {
   const containerRef = useRef<HTMLDivElement>(null);
+  const appRef = useRef<App | null>(null);
+
   useEffect(() => {
     if (!containerRef.current) return;
     const app = new App(containerRef.current, {
@@ -732,13 +700,29 @@ export default function CircularGallery({
       scrollSpeed,
       scrollEase,
     });
+    appRef.current = app;
+
+    const el = containerRef.current;
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const [e] = entries;
+        if (e.isIntersecting) app.resume();
+        else app.pause();
+      },
+      { threshold: 0.1, rootMargin: "50px" }
+    );
+    observer.observe(el);
+
     return () => {
+      observer.disconnect();
       app.destroy();
+      appRef.current = null;
     };
   }, [items, bend, textColor, borderRadius, font, scrollSpeed, scrollEase]);
+
   return (
     <div
-      className="w-full h-[450px] sm:h-[550px] lg:h-[650px] overflow-hidden cursor-grab active:cursor-grabbing bg-transparent"
+      className="w-full h-[450px] sm:h-[550px] lg:h-[650px] overflow-hidden cursor-grab active:cursor-grabbing -mt-10"
       ref={containerRef}
     />
   );

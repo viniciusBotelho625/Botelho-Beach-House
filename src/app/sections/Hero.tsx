@@ -1,15 +1,19 @@
 "use client";
 
+import Image from "next/image";
 import BookingWidget from "../components/BookingWidget";
 
 const Hero = () => {
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
       <div className="absolute inset-0">
-        <img
+        <Image
           src="/hero-beach-house.jpg"
           alt="Casa de praia ao pôr do sol"
-          className="w-full h-full object-cover object-center"
+          fill
+          priority
+          sizes="100vw"
+          className="object-cover object-center"
         />
         <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/20 to-black/50" />
       </div>

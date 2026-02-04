@@ -25,8 +25,8 @@ export const InfiniteMovingCards = ({
   pauseOnHover = true,
   className,
 }: InfiniteMovingCardsProps) => {
-  const containerRef = React.useRef(null);
-  const scrollerRef = React.useRef(null);
+  const containerRef = React.useRef<HTMLDivElement | null>(null);
+  const scrollerRef = React.useRef<HTMLUListElement | null>(null);
   const [start, setStart] = useState(false);
 
   useEffect(() => {
@@ -78,7 +78,7 @@ export const InfiniteMovingCards = ({
     }
   };
 
-  const renderStars = (rating) => {
+  const renderStars = (rating: number) => {
     return [...Array(5)].map((_, i) => (
       <Star
         key={i}
@@ -120,7 +120,7 @@ export const InfiniteMovingCards = ({
       ref={containerRef}
       className={cn(
         "scroller relative z-20 max-w-8xl overflow-hidden [mask-image:linear-gradient(to_right,transparent,white_20%,white_80%,transparent)]",
-        className
+        className ?? ""
       )}
     >
       <style jsx>{`
@@ -142,8 +142,8 @@ export const InfiniteMovingCards = ({
         ref={scrollerRef}
         className={cn(
           "flex w-max min-w-full shrink-0 flex-nowrap gap-6 py-4",
-          start && "animate-scroll",
-          pauseOnHover && "hover:[animation-play-state:paused]"
+          start ? "animate-scroll" : "",
+          pauseOnHover ? "hover:[animation-play-state:paused]" : ""
         )}
       >
         {items.map((item, idx) => (

@@ -1,7 +1,7 @@
 "use client";
 import { useState } from "react";
 import { Home, Calendar, Camera, Star } from "lucide-react";
-import { motion } from "framer-motion";
+import { motion } from "motion/react";
 import { cn } from "@/lib/utils";
 
 interface LinkItem {

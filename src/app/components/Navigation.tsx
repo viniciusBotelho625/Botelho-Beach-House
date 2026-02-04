@@ -12,17 +12,25 @@ const Navigation = () => {
   const { i18n, t } = useTranslation();
 
   useEffect(() => {
-    const handleScroll = () => {
-      // Detecta quando passa da primeira seção (Hero)
-      // A primeira seção geralmente tem altura de 100vh
+    let ticking = false;
+    let lastScrollY = 0;
+
+    const updateBackground = () => {
       const scrollPosition = window.scrollY;
       const heroHeight = window.innerHeight;
-
       setHasBackground(scrollPosition > heroHeight * 0.8);
+      ticking = false;
     };
 
-    window.addEventListener("scroll", handleScroll);
-    handleScroll(); // Verifica na montagem inicial
+    const handleScroll = () => {
+      if (ticking) return;
+      ticking = true;
+      lastScrollY = window.scrollY;
+      requestAnimationFrame(updateBackground);
+    };
+
+    handleScroll();
+    window.addEventListener("scroll", handleScroll, { passive: true });
 
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
@@ -44,9 +52,7 @@ const Navigation = () => {
 
   // Função para trocar o idioma
   const changeLanguage = (lng: string) => {
-    console.log('Changing language to:', lng);
     i18n.changeLanguage(lng).then(() => {
-      console.log('Language changed successfully to:', lng);
       setCurrentLang(lng);
     });
   };

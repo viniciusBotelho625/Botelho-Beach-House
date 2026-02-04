@@ -33,8 +33,8 @@ const CountUp: React.FC<CountUpProps> = ({
 }) => {
   const [value, setValue] = useState<number>(start);
   const [hasStarted, setHasStarted] = useState<boolean>(!startCounting);
-  const requestRef = useRef<number>();
-  const startTimeRef = useRef<number>();
+  const requestRef = useRef<number | null>(null);
+  const startTimeRef = useRef<number | null>(null);
   const elementRef = useRef<HTMLSpanElement>(null);
 
   const formatNumber = (num: number) => {

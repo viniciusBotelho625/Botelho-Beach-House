@@ -1,42 +1,21 @@
 "use client";
 
 import CircularGallery from "../components/CircularGallery";
+import { cloudinaryOptimize } from "@/lib/utils";
+
+const PLACES_RAW = [
+  { image: "https://res.cloudinary.com/dmeglebnu/image/upload/v1770213287/Cama_de_Anchieta_-_Itanha%C3%A9m_-_SP_jqeegq.jpg", text: "Cama de Anchieta" },
+  { image: "https://res.cloudinary.com/dmeglebnu/image/upload/v1770217378/WhatsApp_Image_2026-02-04_at_12.01.51_twqkqc.jpg", text: "Passarela de Anchieta" },
+  { image: "https://res.cloudinary.com/dmeglebnu/image/upload/v1770213939/Itanha%C3%A9m_vxhgyn.jpg", text: "Praia Cibratel" },
+  { image: "https://res.cloudinary.com/dmeglebnu/image/upload/v1770216030/unnamed_zgoims.webp", text: "Morro do Paranambuco" },
+  { image: "https://res.cloudinary.com/dmeglebnu/image/upload/v1770216216/unnamed_1_h8szat.jpg", text: "Estátua Mulheres de Areia" },
+  { image: "https://res.cloudinary.com/dmeglebnu/image/upload/v1770216829/unnamed_2_tskt2g.webp", text: "Centrinho da Cidade" },
+  { image: "https://res.cloudinary.com/dmeglebnu/image/upload/v1770217160/Praia-do-Suarao-Itanhaem-Praiao-SP_q17x4r.jpg", text: "Praia do Suarão" },
+  { image: "https://res.cloudinary.com/dmeglebnu/image/upload/v1770217379/WhatsApp_Image_2026-02-04_at_12.01.51_1_blwj9d.jpg", text: "Praia do Sonho" },
+];
 
 export function Places() {
-  const places = [
-    {
-      image: "https://images.unsplash.com/photo-1559827260-dc66d52bef19?w=900&h=700&fit=crop&sat=-100",
-      text: "Praia de Peruíbe"
-    },
-    {
-      image: "https://images.unsplash.com/photo-1537996194471-e657df975ab4?w=900&h=700&fit=crop&sat=-100",
-      text: "Passeio de Barco"
-    },
-    {
-      image: "https://images.unsplash.com/photo-1582719471137-c3967ffb1c42?w=900&h=700&fit=crop&sat=-100",
-      text: "Ruínas do Abarebebê"
-    },
-    {
-      image: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=900&h=700&fit=crop&sat=-100",
-      text: "Pôr do Sol na Praia"
-    },
-    {
-      image: "https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=900&h=700&fit=crop&sat=-100",
-      text: "Trilhas e Natureza"
-    },
-    {
-      image: "https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?w=900&h=700&fit=crop&sat=-100",
-      text: "Praia do Guaraú"
-    },
-    {
-      image: "https://images.unsplash.com/photo-1519046904884-53103b34b206?w=900&h=700&fit=crop&sat=-100",
-      text: "Centro Histórico"
-    },
-    {
-      image: "https://images.unsplash.com/photo-1530789253388-582c481c54b0?w=900&h=700&fit=crop&sat=-100",
-      text: "Gastronomia Local"
-    },
-  ];
+  const places = PLACES_RAW.map((p) => ({ ...p, image: cloudinaryOptimize(p.image) }));
 
   return (
     <section className="py-12 sm:py-16 lg:py-20 bg-gradient-to-b from-white via-gray-50 to-white">
@@ -58,11 +37,11 @@ export function Places() {
         {/* Gallery */}
           <CircularGallery
             items={places}
-            bend={1}
-            textColor="#ffffff"
+            bend={0.5}
+            textColor="#000000"
             borderRadius={0.05}
             scrollEase={0.05}
-            font="bold 18px sans-serif"
+            font=" 14px Inter, system-ui, -apple-system, sans-serif"
             scrollSpeed={1.8}
           />
 
