@@ -70,16 +70,7 @@ const Navigation = () => {
     >
       <div className="max-w-[1400px] mx-auto flex items-center justify-between">
         <div className="flex items-center gap-2 sm:gap-4 lg:gap-6">
-          <Button
-            variant="ghost"
-            size="sm"
-            className="text-white/90 hover:text-white hover:bg-white/10 gap-1 sm:gap-2 p-2 sm:p-2"
-          >
-            <Menu className="h-4 w-4 sm:h-5 sm:w-5" />
-            <span className="text-xs sm:text-sm font-light tracking-wider uppercase hidden xs:inline">
-              Menu
-            </span>
-          </Button>
+         
           <Separator className="h-4 sm:h-5 bg-white/10 hidden sm:block" />
           <div className="flex items-center gap-3 sm:gap-6 text-white/80 text-xs sm:text-sm font-light">
             <button 

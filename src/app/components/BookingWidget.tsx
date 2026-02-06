@@ -2,24 +2,15 @@
 
 import {
   Users,
-  Home,
   ChevronRight,
-  ChevronUpIcon,
   ChevronDownIcon,
   Plus,
   Minus,
-  Clock10
+  CalendarIcon
 } from "lucide-react";
 import { Calendar } from "./ui/calendar";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "./ui/select";
+import { useTranslation } from "react-i18next";
 import { Button } from "./ui/button";
-import { Input } from "./ui/input";
 import { Label } from "./ui/label";
 import { Popover, PopoverContent, PopoverTrigger } from "./ui/popover";
 import { useState } from "react";
@@ -30,7 +21,7 @@ import { useQuery } from "@tanstack/react-query";
 import { getAirbnbCalendar, type Booking } from "@/lib/airbnbCalendar";
 
 const BookingWidget = () => {
-  const [checkInOpen, setCheckInOpen] = useState(false);
+  const { t } = useTranslation();
   const [checkOutOpen, setCheckOutOpen] = useState(false);
   const [checkInDate, setCheckInDate] = useState<Date | undefined>(undefined);
   const [checkOutDate, setCheckOutDate] = useState<Date | undefined>(undefined);
@@ -41,7 +32,6 @@ const BookingWidget = () => {
   });
   const [animals, setAnimals] = useState(0);
   const [guestsPopoverOpen, setGuestsPopoverOpen] = useState(false);
-  const [horario, setHorario] = useState<string>("");
   const totalGuests = guests.adultos + guests.criancas;
 
   // Buscar reservas do Airbnb usando TanStack Query com cache de 30 minutos
@@ -77,6 +67,18 @@ const BookingWidget = () => {
     });
   };
 
+  /** Retorna true se algum dia no intervalo [from, to) estiver bloqueado. */
+  const isRangeIncludingBookedDays = (from: Date, to: Date): boolean => {
+    const fromNorm = new Date(from);
+    fromNorm.setHours(0, 0, 0, 0);
+    const toNorm = new Date(to);
+    toNorm.setHours(0, 0, 0, 0);
+    for (const d = new Date(fromNorm); d < toNorm; d.setDate(d.getDate() + 1)) {
+      if (isDateBooked(d)) return true;
+    }
+    return false;
+  };
+
   const disabledDates = (date: Date): boolean => {
     const today = new Date();
     today.setHours(0, 0, 0, 0);
@@ -93,46 +95,68 @@ const BookingWidget = () => {
           <div className="w-full md:w-auto">
             <div className="flex flex-col gap-2 border-b border-white/20 pb-3">
               <Label htmlFor="date-picker" className="text-white/70 text-xs sm:text-sm md:text-md uppercase tracking-widest font-light">
-                Data
+                {t("hero.dataLabel")}
               </Label>
               <Popover open={checkOutOpen} onOpenChange={setCheckOutOpen}>
                 <PopoverTrigger asChild>
-                  <Button variant="outline" id="checkout-date-picker" className="w-full md:w-60 justify-between font-normal bg-transparent border-none shadow-none text-white/70 p-0 cursor-pointer text-xs sm:text-sm h-auto">
+                  <Button variant="outline" id="checkout-date-picker" className="w-full md:w-60 justify-between font-normal bg-transparent hover:bg-transparent hover:text-white/50 border-none shadow-none text-white/70 p-0! cursor-pointer text-xs sm:text-sm h-auto">
+                    <div className="flex items-center gap-2">
+                      <CalendarIcon className="h-4 w-4 shrink-0" />
                     <span className="truncate">
                       {checkInDate && checkOutDate
                         ? `${checkInDate.toLocaleDateString("pt-BR")} - ${checkOutDate.toLocaleDateString("pt-BR")}`
                         : checkInDate
                           ? `${checkInDate.toLocaleDateString("pt-BR")} - Selecione saída`
-                          : "Selecione as datas"}
+                          : t("hero.data")}
                     </span>
+                    </div>
                     <ChevronDownIcon className="ml-2 h-4 w-4 shrink-0" />
                   </Button>
                 </PopoverTrigger>
                 <PopoverContent className="w-auto bg-[#03303E]/70 backdrop-blur-xl border-white/30 rounded-lg shadow-2xl text-white" align="end" onOpenAutoFocus={(e) => e.preventDefault()}>
-                  <Calendar
-                    key={`${checkInDate?.getTime()}-${checkOutDate?.getTime()}`}
-                    mode="range"
-                    locale={ptBR}
-                    selected={
-                      checkInDate || checkOutDate
-                        ? { from: checkInDate, to: checkOutDate }
-                        : undefined
-                    }
-                    disabled={disabledDates}
-                    modifiers={{ booked: (date) => isDateBooked(date) }}
+                  <div className="flex flex-col gap-2">
+                    {(checkInDate || checkOutDate) && (
+                      <button
+                        type="button"
+                        onClick={() => {
+                          setCheckInDate(undefined);
+                          setCheckOutDate(undefined);
+                        }}
+                        className="text-xs text-white/70 hover:text-white underline self-end"
+                      >
+                        Limpar datas
+                      </button>
+                    )}
+                    <Calendar
+                      mode="range"
+                      locale={ptBR}
+                      selected={
+                        checkInDate || checkOutDate
+                          ? { from: checkInDate, to: checkOutDate }
+                          : undefined
+                      }
+                      disabled={disabledDates}
+                      excludeDisabled
+                      modifiers={{ booked: (date) => isDateBooked(date) }}
                     modifiersClassNames={{ booked: "opacity-40 line-through cursor-not-allowed text-red-300/50" }}
                     classNames={{ day_disabled: "opacity-40 line-through cursor-not-allowed text-red-300" }}
                     onSelect={(range: DateRange | undefined) => {
                       if (range) {
+                        const today = new Date();
+                        today.setHours(0, 0, 0, 0);
                         if (range.from) {
-                          const today = new Date();
-                          today.setHours(0, 0, 0, 0);
-                          const dateToCheck = new Date(range.from);
-                          dateToCheck.setHours(0, 0, 0, 0);
-                          if (dateToCheck < today) return;
+                          const fromNorm = new Date(range.from);
+                          fromNorm.setHours(0, 0, 0, 0);
+                          if (fromNorm < today) return;
                           if (isDateBooked(range.from)) return;
                         }
-                        if (range.to && isDateBooked(range.to)) return;
+                        if (range.to) {
+                          const toNorm = new Date(range.to);
+                          toNorm.setHours(0, 0, 0, 0);
+                          if (toNorm < today) return;
+                          if (isDateBooked(range.to)) return;
+                          if (range.from && isRangeIncludingBookedDays(range.from, range.to)) return;
+                        }
                         setCheckInDate(range.from);
                         setCheckOutDate(range.to ?? undefined);
                         if (range.from && range.to) {
@@ -144,6 +168,7 @@ const BookingWidget = () => {
                       }
                     }}
                   />
+                  </div>
                 </PopoverContent>
               </Popover>
             </div>
@@ -152,16 +177,16 @@ const BookingWidget = () => {
           {/* Guests Picker */}
           <div className="w-full md:w-auto">
             <div className="flex flex-col gap-2 border-b border-white/20 pb-3">
-              <Label className="text-white/70 text-xs sm:text-sm md:text-md uppercase tracking-widest font-light">Hóspedes</Label>
+              <Label className="text-white/70 text-xs sm:text-sm md:text-md uppercase tracking-widest font-light">{t("hero.guestsLabel")}</Label>
               <Popover open={guestsPopoverOpen} onOpenChange={setGuestsPopoverOpen}>
                 <PopoverTrigger asChild>
-                  <Button variant="outline" className="w-full md:w-60 justify-between font-normal bg-transparent border-none shadow-none text-white/70 cursor-pointer p-0 text-xs sm:text-sm h-auto">
+                  <Button variant="outline" className="w-full md:w-60 justify-between font-normal border-none shadow-none text-white/70 cursor-pointer p-0! bg-transparent hover:bg-transparent hover:text-white/50 text-xs sm:text-sm h-auto">
                     <div className="flex items-center gap-2">
                       <Users className="h-4 w-4 shrink-0" />
                       <span className="truncate">
-                        {guests.adultos + guests.criancas === 0
-                          ? "Selecionar hóspedes"
-                          : `${guests.adultos + guests.criancas} hóspede${guests.adultos + guests.criancas > 1 ? "s" : ""}`}
+                        {totalGuests === 0
+                          ? t("hero.guests")
+                          : `${totalGuests} ${totalGuests > 1 ? t("hero.guest_plural") : t("hero.guest_singular")}`}
                       </span>
                     </div>
                     <ChevronDownIcon className="h-4 w-4 shrink-0" />
@@ -171,7 +196,7 @@ const BookingWidget = () => {
                   <div className="space-y-4">
                     <div className="flex items-center justify-between py-1">
                       <div className="flex flex-col gap-0.5">
-                        <Label className="text-white font-semibold text-base">Adultos</Label>
+                        <Label className="text-white font-semibold text-base">{t("hero.adults")}</Label>
                       </div>
                       <div className="flex items-center gap-3">
                         <ButtonRounded
@@ -185,7 +210,7 @@ const BookingWidget = () => {
                     </div>
                     <div className="flex items-center justify-between py-1">
                       <div className="flex flex-col gap-0.5">
-                        <Label className="text-white font-semibold text-base">Crianças</Label>
+                        <Label className="text-white font-semibold text-base">{t("hero.children")}</Label>
                       </div>
                       <div className="flex items-center gap-3">
                         <ButtonRounded
@@ -199,7 +224,7 @@ const BookingWidget = () => {
                     </div>
                     <div className="flex items-center justify-between py-1">
                       <div className="flex flex-col gap-0.5">
-                        <Label className="text-white font-semibold text-base">Bebês</Label>
+                        <Label className="text-white font-semibold text-base">{t("hero.babies")}</Label>
                       </div>
                       <div className="flex items-center gap-3">
                         <ButtonRounded
@@ -213,7 +238,7 @@ const BookingWidget = () => {
                     </div>
                     <div className="flex items-center justify-between py-1">
                       <div className="flex flex-col gap-0.5">
-                        <Label className="text-white font-semibold text-base">Animais</Label>
+                        <Label className="text-white font-semibold text-base">{t("hero.animals")}</Label>
                       </div>
                       <div className="flex items-center gap-3">
                         <ButtonRounded
@@ -227,7 +252,7 @@ const BookingWidget = () => {
                     </div>
                     <div className="bg-white/10 h-px w-full" />
                     <Button className="w-full text-black border-0 bg-white/90 h-10 sm:h-11 hover:text-black hover:bg-white/50 font-light tracking-wider uppercase text-xs sm:text-sm cursor-pointer">
-                      Confirmar
+                      {t("hero.confirm")}
                     </Button>
                   </div>
                 </PopoverContent>
@@ -237,7 +262,7 @@ const BookingWidget = () => {
 
           {/* Reserva Button */}
           <Button className="w-full md:w-auto md:min-w-60 text-black border-0 bg-white/90 hover:bg-white/50 h-11 sm:h-12 hover:text-black font-light tracking-wider uppercase text-sm cursor-pointer">
-            Reserva
+            {t("hero.buttonNext")}
             <ChevronRight className="h-4 w-4 ml-2" />
           </Button>
         </div>

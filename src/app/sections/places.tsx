@@ -1,5 +1,6 @@
 "use client";
 
+import { useTranslation } from "react-i18next";
 import CircularGallery from "../components/CircularGallery";
 import { cloudinaryOptimize } from "@/lib/utils";
 
@@ -15,24 +16,23 @@ const PLACES_RAW = [
 ];
 
 export function Places() {
+  const { t } = useTranslation();
   const places = PLACES_RAW.map((p) => ({ ...p, image: cloudinaryOptimize(p.image) }));
 
   return (
-    <section className="py-12 sm:py-16 lg:py-20 bg-gradient-to-b from-white via-gray-50 to-white">
+    <section className=" sm:py-16 lg:py-20 bg-gradient-to-b from-white via-gray-50 to-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
-        <div className="text-center mb-8 sm:mb-12">
-          <p className="text-xs sm:text-sm uppercase tracking-wider text-primary font-medium mb-3">
-            EXPLORE
+        <div className="text-center mb-12 max-w-3xl mx-auto">
+          <p className="text-sm uppercase tracking-wider text-primary font-medium mb-4">
+            {t("places.title")}
           </p>
-          <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold mb-4">
-            <span className="text-gray-900">Descubra</span>{" "}
-            <span className="text-primary">Pontos Turísticos</span>
+          <h2 className="text-4xl md:text-5xl font-bold mb-4 text-gray-900">
+            {t("places.subtitle")}
           </h2>
-          <p className="text-sm sm:text-base md:text-lg text-gray-600 max-w-3xl mx-auto">
-            Praias paradisíacas, natureza exuberante e cultura rica a poucos minutos da casa
-          </p>
+          
         </div>
+       
 
         {/* Gallery */}
           <CircularGallery

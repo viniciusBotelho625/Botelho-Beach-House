@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Inter:wght@300;400;500;600&display=swap');
 @import "tailwindcss";
 @import "tw-animate-css";
 @custom-variant dark (&:is(.dark *));
@@ -10,10 +11,32 @@
   --background-navbar: #1D1B1A;
 }
 
-
 @theme inline {
   --color-background: var(--white);
   --color-background-navbar: var(--background-navbar);
+  --color-ocean-foam: hsl(180 30% 85%);
+
+  --color-foreground: hsl(180 20% 95%);
+  --color-card: hsl(200 30% 12%);
+  --color-card-foreground: hsl(180 20% 95%);
+  --color-popover: hsl(200 30% 10%);
+  --color-popover-foreground: hsl(180 20% 95%);
+  --color-primary: hsl(180 50% 45%);
+  --color-primary-foreground: hsl(200 25% 8%);
+  --color-secondary: hsl(200 40% 20%);
+  --color-secondary-foreground: hsl(180 20% 95%);
+  --color-muted: hsl(200 30% 18%);
+  --color-muted-foreground: hsl(180 15% 65%);
+  --color-accent: hsl(175 60% 40%);
+  --color-accent-foreground: hsl(200 25% 8%);
+  --color-destructive: hsl(0 84% 60%);
+  --color-destructive-foreground: hsl(210 40% 98%);
+  --color-border: hsl(200 30% 25%);
+  --color-input: hsl(200 30% 20%);
+  --color-ring: hsl(180 50% 45%);
+  --color-ocean-deep: hsl(200 60% 15%);
+  --color-ocean-medium: hsl(190 55% 30%);
+  --color-ocean-light: hsl(180 50% 45%);
 
   --animate-scroll: scroll var(--animation-duration, 40s) var(--animation-direction, forwards) linear infinite;
 
@@ -24,137 +47,113 @@
   }
 }
 
-body {
-  font-optical-sizing: auto;
-  font-style: normal;
-  background:
-    linear-gradient(rgba(0, 0, 0, 0) 0%,
-      rgba(0, 0, 0, 0.35) 100%),
-    #002b36;
-  /* sua cor base aqui */
-}
-
 @layer base {
-
   :root {
-    --background: 220 25% 10%;
-    --foreground: 210 40% 98%;
+    --background: 200 25% 8%;
+    --foreground: 180 20% 95%;
 
-    --card: 220 20% 15%;
-    --card-foreground: 210 40% 98%;
+    --card: 200 30% 12%;
+    --card-foreground: 180 20% 95%;
 
-    --popover: 220 20% 15%;
-    --popover-foreground: 210 40% 98%;
+    --popover: 200 30% 10%;
+    --popover-foreground: 180 20% 95%;
 
-    --primary: 200 95% 55%;
-    --primary-foreground: 210 40% 98%;
+    --primary: 180 50% 45%;
+    --primary-foreground: 200 25% 8%;
 
-    --secondary: 220 20% 20%;
-    --secondary-foreground: 210 40% 98%;
+    --secondary: 200 40% 20%;
+    --secondary-foreground: 180 20% 95%;
 
-    --muted: 220 15% 25%;
-    --muted-foreground: 215 20% 65%;
+    --muted: 200 30% 18%;
+    --muted-foreground: 180 15% 65%;
 
-    --accent: 280 85% 65%;
-    --accent-foreground: 210 40% 98%;
+    --accent: 175 60% 40%;
+    --accent-foreground: 200 25% 8%;
 
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 210 40% 98%;
 
-    --border: 220 15% 25%;
-    --input: 220 15% 25%;
-    --ring: 200 95% 55%;
+    --border: 200 30% 25%;
+    --input: 200 30% 20%;
+    --ring: 180 50% 45%;
 
-    --radius: 1rem;
+    --radius: 0.75rem;
 
-    --gradient-primary: linear-gradient(135deg, hsl(200 95% 55%), hsl(280 85% 65%));
-    --gradient-card: linear-gradient(180deg, hsl(220 20% 18%), hsl(220 20% 12%));
-    --shadow-glow: 0 0 40px hsl(200 95% 55% / 0.3);
+    /* Custom ocean colors */
+    --ocean-deep: 200 60% 15%;
+    --ocean-medium: 190 55% 30%;
+    --ocean-light: 180 50% 45%;
+    --ocean-foam: 180 30% 85%;
+    --overlay-dark: 200 40% 10% / 0.85;
+
+    --sidebar-background: 200 30% 10%;
+    --sidebar-foreground: 180 20% 95%;
+    --sidebar-primary: 180 50% 45%;
+    --sidebar-primary-foreground: 200 25% 8%;
+    --sidebar-accent: 200 30% 18%;
+    --sidebar-accent-foreground: 180 20% 95%;
+    --sidebar-border: 200 30% 25%;
+    --sidebar-ring: 180 50% 45%;
+
+    /* Gradientes e sombras */
+    --gradient-primary: linear-gradient(135deg, hsl(180 50% 45%), hsl(175 60% 40%));
     --gradient-ocean: linear-gradient(135deg, hsl(190 70% 42%), hsl(180 60% 50%));
     --gradient-sand: linear-gradient(180deg, hsl(35 35% 90%), hsl(35 30% 85%));
-
-    --sidebar-background: 0 0% 98%;
-
-    --sidebar-foreground: 240 5.3% 26.1%;
-
-    --sidebar-primary: 240 5.9% 10%;
-
-    --sidebar-primary-foreground: 0 0% 98%;
-
-    --sidebar-accent: 240 4.8% 95.9%;
-
-    --sidebar-accent-foreground: 240 5.9% 10%;
-
-    --sidebar-border: 220 13% 91%;
-
-    --sidebar-ring: 217.2 91.2% 59.8%;
+    --shadow-glow: 0 0 40px hsl(180 50% 45% / 0.3);
   }
 
   .dark {
-    --background: 220 25% 8%;
-    --foreground: 210 40% 98%;
+    --background: 200 25% 8%;
+    --foreground: 180 20% 95%;
+
+    --card: 200 30% 12%;
+    --card-foreground: 180 20% 95%;
+
+    --popover: 200 30% 10%;
+    --popover-foreground: 180 20% 95%;
+
+    --primary: 180 50% 45%;
+    --primary-foreground: 200 25% 8%;
+
+    --secondary: 200 40% 20%;
+    --secondary-foreground: 180 20% 95%;
+
+    --muted: 200 30% 18%;
+    --muted-foreground: 180 15% 65%;
+
+    --accent: 175 60% 40%;
+    --accent-foreground: 200 25% 8%;
+
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 200 30% 25%;
+    --input: 200 30% 20%;
+    --ring: 180 50% 45%;
+
+    --sidebar-background: 200 30% 10%;
+    --sidebar-foreground: 180 20% 95%;
+    --sidebar-primary: 180 50% 45%;
+    --sidebar-primary-foreground: 200 25% 8%;
+    --sidebar-accent: 200 30% 18%;
+    --sidebar-accent-foreground: 180 20% 95%;
+    --sidebar-border: 200 30% 25%;
+    --sidebar-ring: 180 50% 45%;
   }
 
   body {
-    @apply bg-background;
-    font-family: 'Poppins', system-ui, -apple-system, sans-serif;
+    @apply bg-background text-foreground font-sans antialiased;
+    font-family: 'Inter', sans-serif;
+    font-optical-sizing: auto;
+    font-style: normal;
+    background:
+      linear-gradient(rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.35) 100%),
+      #002b36;
   }
 
-  h1,
-  h2,
-  h3,
-  h4,
-  h5,
-  h6 {
-    font-family: 'Playfair Display', 'Georgia', serif;
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Playfair Display', serif;
   }
-
-  #root {
-    max-width: 1280px;
-    margin: 0 auto;
-    padding: 2rem;
-    text-align: center;
-  }
-
-  .logo {
-    height: 6em;
-    padding: 1.5em;
-    will-change: filter;
-    transition: filter 300ms;
-  }
-
-  .logo:hover {
-    filter: drop-shadow(0 0 2em #646cffaa);
-  }
-
-  .logo.react:hover {
-    filter: drop-shadow(0 0 2em #61dafbaa);
-  }
-
-  @keyframes logo-spin {
-    from {
-      transform: rotate(0deg);
-    }
-
-    to {
-      transform: rotate(360deg);
-    }
-  }
-
-  @media (prefers-reduced-motion: no-preference) {
-    a:nth-of-type(2) .logo {
-      animation: logo-spin infinite 20s linear;
-    }
-  }
-
-  .card {
-    padding: 2em;
-  }
-
-  .read-the-docs {
-    color: #888;
-  }
-
 }
 
 @layer components {
@@ -164,5 +163,122 @@ body {
 
   .bg-gradient-sand {
     background-image: var(--gradient-sand);
+  }
+
+  .glass-card {
+    @apply bg-card/60 backdrop-blur-xl border border-border/50 shadow-2xl;
+  }
+
+  .hero-overlay {
+    background: linear-gradient(
+      180deg,
+      hsl(var(--overlay-dark)) 0%,
+      hsl(200 40% 10% / 0.6) 50%,
+      hsl(var(--overlay-dark)) 100%
+    );
+  }
+
+  .btn-ocean {
+    @apply text-white font-semibold tracking-wide
+           transition-all duration-300 ease-out
+           hover:opacity-90 hover:shadow-lg
+           focus:ring-2 focus:ring-primary/50 focus:ring-offset-2 focus:ring-offset-background;
+    background: linear-gradient(90deg, hsl(180 50% 40%), hsl(175 65% 50%));
+  }
+
+  .input-ocean {
+    @apply bg-input/80 border-border/50 text-foreground
+           placeholder:text-muted-foreground
+           focus:border-primary focus:ring-1 focus:ring-primary/50
+           transition-all duration-200;
+  }
+
+  .label-ocean {
+    @apply text-ocean-foam text-sm font-medium tracking-wider uppercase;
+  }
+
+  /* Reservation Form */
+  .reservation-card {
+    @apply rounded-2xl border shadow-2xl backdrop-blur-sm;
+    background: hsl(200 30% 14%);
+    border-color: hsl(200 30% 25% / 0.5);
+  }
+
+  .glow-accent {
+    box-shadow: 0 0 60px hsl(180 50% 45% / 0.08);
+  }
+
+  .reservation-label {
+    @apply text-xs sm:text-sm font-medium tracking-wider uppercase;
+    color: hsl(180 30% 85%);
+  }
+
+  .reservation-input {
+    @apply h-12 rounded-lg border transition-colors;
+    background: hsl(200 30% 18%) !important;
+    border-color: hsl(200 30% 25%);
+    color: white;
+  }
+
+  .reservation-input::placeholder {
+    color: hsl(180 20% 95% / 0.5);
+  }
+
+  .reservation-input:hover {
+    background: hsl(200 30% 22%);
+    border-color: hsl(200 30% 30%);
+  }
+
+  .reservation-input:focus {
+    border-color: hsl(180 50% 45%);
+    outline: none;
+    box-shadow: 0 0 0 1px hsl(180 50% 45% / 0.3);
+  }
+
+  .reservation-btn {
+    @apply text-white font-semibold transition-all duration-300;
+    background: linear-gradient(90deg, hsl(180 50% 40%), hsl(175 65% 50%));
+  }
+
+  .reservation-btn:hover {
+    opacity: 0.95;
+    box-shadow: 0 8px 25px hsl(180 50% 45% / 0.35);
+  }
+
+  .text-gradient-accent {
+    background: linear-gradient(135deg, hsl(180 50% 60%), hsl(175 65% 55%));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  @keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-6px); }
+  }
+
+  .animate-float {
+    animation: float 4s ease-in-out infinite;
+  }
+}
+
+@layer utilities {
+  .text-gradient-ocean {
+    @apply bg-gradient-to-r from-primary via-accent to-primary bg-clip-text text-transparent;
+  }
+
+  .animate-fade-up {
+    animation: fadeUp 0.6s ease-out forwards;
+  }
+
+  @keyframes fadeUp {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
   }
 }

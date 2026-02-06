@@ -1,9 +1,10 @@
 "use client";
 
-import { t } from "i18next";
+import { useTranslation } from "react-i18next";
 import { Instagram, Mail, Phone, MapPin, Heart, Waves } from "lucide-react";
 
 export default function Footer() {
+  const { t } = useTranslation();
   const currentYear = new Date().getFullYear();
 
   return (
@@ -16,10 +17,6 @@ export default function Footer() {
           fill="none"
           xmlns="http://www.w3.org/2000/svg"
         >
-          <path
-            d="M0,0 L0,40 C240,0 480,80 720,40 C960,0 1200,80 1440,40 L1440,0 Z"
-            fill="#ffffff"
-          />
           <path
             d="M0,0 L0,50 C240,10 480,90 720,50 C960,10 1200,90 1440,50 L1440,0 Z"
             fill="#ffffff"
@@ -160,7 +157,8 @@ export default function Footer() {
         <div className="border-t border-white/10 pt-6 sm:pt-8 mt-6 sm:mt-8">
           <div className="flex flex-col sm:flex-row justify-between items-center gap-3 sm:gap-4">
             <p className="text-white/80 text-xs sm:text-sm text-center sm:text-left">
-              © {currentYear} Botelho Beach House. Todos os direitos reservados.
+              © {currentYear} Botelho Beach House. Todos os direitos
+              reservados.
             </p>
             <div className="flex items-center gap-1.5 sm:gap-2 text-white/80 text-xs sm:text-sm">
               <span>Feito com</span>

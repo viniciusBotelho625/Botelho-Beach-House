@@ -31,13 +31,12 @@ export function Amenities() {
     <section className="py-12 px-4 bg-gray-50">
       <div className="max-w-7xl mx-auto">
         <div className="text-center mb-12">
-          <h2 className="text-4xl font-bold font-serif">
+          <p className="text-sm uppercase tracking-wider text-primary font-medium mb-4">
             {t("amenities.title")}
-          </h2>
-          <p className="text-muted-foreground mt-2">
-            {t("amenities.subtitle")}
           </p>
-          <div className="w-24 h-1 bg-gradient-ocean mx-auto rounded-full mt-4" />
+          <h2 className="text-4xl md:text-5xl font-bold mb-4 text-gray-900">
+            {t("amenities.subtitle")}
+          </h2>
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -48,11 +47,11 @@ export function Amenities() {
                   <Icon className="text-white" size={30} />
                 </div>
 
-                <h3 className="font-semibold text-lg mb-3">
+                <h3 className="font-semibold text-lg mb-3 text-gray-900">
                   {t(`amenities.${key}`)}
                 </h3>
 
-                <p className="text-muted-foreground text-sm">
+                <p className="text-gray-600 text-sm">
                   {t(`amenities.${desc}`)}
                 </p>
               </CardContent>

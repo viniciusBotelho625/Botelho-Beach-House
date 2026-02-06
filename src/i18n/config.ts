@@ -26,11 +26,20 @@ const resources = {
         contact: 'Contato',
       },
       hero: {
-        title: 'Sua Casa de Praia dos Sonhos',
-        subtitle: 'Experiência Única em',
-        location: 'Itanhém, SP',
-        description: 'Casa moderna com piscina privativa, churrasqueira e a poucos minutos da praia. O refúgio perfeito para sua família.',
-        cta: 'Reserve Agora',
+        title: 'Explore Sua Casa de Praia',
+        subtitle: 'dos Sonhos',
+        data: 'Selecionar as datas',
+        guests: 'Selecionar hóspedes',
+        guestSingular: 'hóspede',
+        guestPlural: 'hóspedes',
+        dataLabel: 'Datas',
+        guestsLabel: 'Hóspedes',
+        buttonNext: 'Próximo',
+        adults: 'Adultos',
+        children: 'Crianças',
+        babies: 'Bebês',
+        animals: 'Animais',
+        confirm: 'Confirmar',
       },
       amenities: {
         title: 'Comodidades',
@@ -55,6 +64,10 @@ const resources = {
       photos: {
         title: 'Galeria de Fotos',
         subtitle: 'Conheça Nossa Casa',
+      },
+      places: {
+        title: 'Pontos Turísticos',
+        subtitle: 'Belas praias e rica cultura a poucos minutos de distância.',
       },
       reviews: {
         title: 'Depoimentos',
@@ -85,11 +98,20 @@ const resources = {
         contact: 'Contact',
       },
       hero: {
-        title: 'Your Dream Beach House',
-        subtitle: 'Unique Experience in',
-        location: 'Itanhaém, SP - Brazil',
-        description: 'Modern house with private pool, barbecue area and just minutes from the beach. The perfect getaway for your family.',
-        cta: 'Book Now',
+        title: 'Explore Your Dream',
+        subtitle: 'Beach House',
+        data: 'Select the dates',
+        guests: 'Select guests',
+        guest_singular: 'guest',
+        guest_plural: 'guests',
+        dataLabel: 'Dates',
+        guestsLabel: 'Guests',
+        buttonNext: 'Next',
+        adults: 'Adults',
+        children: 'Children',
+        babies: 'Babies',
+        animals: 'Animals',
+        confirm: 'Confirm',
       },
       amenities: {
         title: 'Amenities',
@@ -114,6 +136,10 @@ const resources = {
       photos: {
         title: 'Photo Gallery',
         subtitle: 'Discover Our House',
+      },
+      places: {
+        title: 'Tourist Places',
+        subtitle: 'Beautiful Beaches and Rich Culture a Few Minutes Away',
       },
       reviews: {
         title: 'Testimonials',
