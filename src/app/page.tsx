@@ -8,7 +8,7 @@ const Photos = dynamic(
     loading: () => (
       <section className="min-h-[600px] bg-gray-100 animate-pulse" />
     ),
-  }
+  },
 );
 
 const Amenities = dynamic(
@@ -18,7 +18,7 @@ const Amenities = dynamic(
     loading: () => (
       <section className="min-h-[400px] bg-gray-50 animate-pulse" />
     ),
-  }
+  },
 );
 
 const Places = dynamic(
@@ -28,7 +28,7 @@ const Places = dynamic(
     loading: () => (
       <section className="min-h-[500px] bg-gray-50 animate-pulse" />
     ),
-  }
+  },
 );
 
 const Reserve = dynamic(
@@ -38,7 +38,7 @@ const Reserve = dynamic(
     loading: () => (
       <section className="min-h-[400px] bg-gray-50 animate-pulse" />
     ),
-  }
+  },
 );
 
 const Rating = dynamic(
@@ -48,7 +48,7 @@ const Rating = dynamic(
     loading: () => (
       <section className="min-h-[400px] bg-gray-100 animate-pulse" />
     ),
-  }
+  },
 );
 
 const Footer = dynamic(() => import("./sections/footer"), {
