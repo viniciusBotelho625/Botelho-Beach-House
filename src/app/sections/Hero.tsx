@@ -4,7 +4,7 @@ import Image from "next/image";
 import BookingWidget from "../components/BookingWidget";
 import { useTranslation } from "react-i18next";
 
-const Hero = () => {
+export const Hero = () => {
   const { t } = useTranslation();
   return (
     <section className="relative min-h-screen min-h-dvh flex items-center justify-center overflow-hidden">
@@ -20,8 +20,8 @@ const Hero = () => {
         <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/20 to-black/50" />
       </div>
 
-      <div className="relative z-10 text-center px-3 sm:px-6 lg:px-8 py-8 sm:py-12 flex flex-col items-center justify-center min-h-screen min-h-dvh w-full">
-        <div className="flex-1 flex items-center justify-center mb-6 sm:mb-8 md:mb-12">
+      <div className="relative z-10 text-center px-3 sm:px-6 lg:px-8 py-12 pb-16 sm:py-16 md:py-20 flex flex-col items-center justify-center min-h-screen min-h-dvh w-full gap-8 sm:gap-10 md:gap-14">
+        <div className="grow flex items-center justify-center max-h-[50vh] sm:max-h-none">
           <h2 className="text-2xl sm:text-5xl md:text-5xl lg:text-6xl xl:text-7xl text-white font-light italic leading-tight max-w-5xl px-2 sm:px-4">
             {t("hero.title")}
             <br />
@@ -29,7 +29,7 @@ const Hero = () => {
           </h2>
         </div>
 
-        <div className="w-full max-w-6xl px-2 sm:px-4">
+        <div className="w-full max-w-6xl px-2 sm:px-4 shrink-0">
           <BookingWidget />
         </div>
       </div>

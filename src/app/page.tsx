@@ -1,10 +1,10 @@
-import { Amenities } from "./sections/Amenities";
-import Hero from "./sections/Hero";
 import { Photos } from "./sections/photos";
 import { Places } from "./sections/places";
 import { Rating } from "./sections/rating";
-import { Reserve } from "./sections/Reserve";
-import Footer from "./sections/footer";
+import { Footer } from "./sections/footer";
+import { Amenities } from "./sections/amenities";
+import { Hero } from "./sections/hero";
+import { Reserve } from "./sections/reserve";
 
 export default function Home() {
   return (
