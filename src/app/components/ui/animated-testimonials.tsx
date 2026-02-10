@@ -3,6 +3,7 @@
 import { IconArrowLeft, IconArrowRight } from "@tabler/icons-react";
 import { motion, AnimatePresence } from "motion/react";
 import { useEffect, useState, useMemo, useCallback } from "react";
+import { useTranslation } from "react-i18next";
 
 type Testimonial = {
   quote: string;
@@ -18,15 +19,16 @@ export const AnimatedTestimonials = ({
   testimonials: Testimonial[];
   autoplay?: boolean;
 }) => {
+  const { t } = useTranslation();
   const [active, setActive] = useState(0);
 
   const handleNext = useCallback(() => {
     setActive((prev) => (prev + 1) % testimonials.length);
   }, [testimonials.length]);
 
-  const handlePrev = () => {
+  const handlePrev = useCallback(() => {
     setActive((prev) => (prev - 1 + testimonials.length) % testimonials.length);
-  };
+  }, [testimonials.length]);
 
   const isActive = (index: number) => index === active;
 
@@ -37,8 +39,27 @@ export const AnimatedTestimonials = ({
     }
   }, [autoplay, handleNext]);
 
+  const DRAG_THRESHOLD = 50;
+  const VELOCITY_THRESHOLD = 200;
+
+  const handleDragEnd = useCallback(
+    (_: MouseEvent | TouchEvent | PointerEvent, info: { offset: { x: number }; velocity: { x: number } }) => {
+      const { offset, velocity } = info;
+      if (offset.x < -DRAG_THRESHOLD || velocity.x < -VELOCITY_THRESHOLD) {
+        handleNext();
+      } else if (offset.x > DRAG_THRESHOLD || velocity.x > VELOCITY_THRESHOLD) {
+        handlePrev();
+      }
+    },
+    [handleNext, handlePrev],
+  );
+
+  // Valores determinísticos por índice para evitar hydration mismatch (Math.random difere no server vs client)
   const rotations = useMemo(
-    () => testimonials.map(() => Math.floor(Math.random() * 21) - 10),
+    () => {
+      const SEED = [-8, 5, -3, 7, -5, 2, -7, 4, -2, 6, -10, 1];
+      return testimonials.map((_, i) => SEED[i % SEED.length]);
+    },
     [testimonials.length],
   );
 
@@ -46,7 +67,13 @@ export const AnimatedTestimonials = ({
     <div className="mx-auto w-full px-4 font-sans antialiased sm:max-w-xl md:max-w-6xl md:px-8 lg:px-12">
       <div className="relative grid grid-cols-1 gap-8 md:grid-cols-2 md:gap-12 items-center">
         <div className="flex justify-center md:block">
-          <div className="relative h-[290px] w-[290px] min-[400px]:h-[300px] min-[400px]:w-[300px] sm:h-[380px] sm:w-[380px] md:h-[400px] md:w-[400px] lg:h-[550px] lg:w-[550px]">
+          <motion.div
+            className="relative h-[290px] w-[290px] min-[400px]:h-[300px] min-[400px]:w-[300px] sm:h-[380px] sm:w-[380px] md:h-[400px] md:w-[400px] lg:h-[550px] lg:w-[550px] cursor-grab active:cursor-grabbing touch-pan-y"
+            drag="x"
+            dragConstraints={{ left: 0, right: 0 }}
+            dragElastic={0.15}
+            onDragEnd={handleDragEnd}
+          >
             <AnimatePresence>
               {testimonials.map((testimonial, index) => (
                 <motion.div
@@ -92,7 +119,7 @@ export const AnimatedTestimonials = ({
                 </motion.div>
               ))}
             </AnimatePresence>
-          </div>
+          </motion.div>
         </div>
         <div className="flex flex-col justify-between py-4 px-0 md:px-20">
           <motion.div
@@ -133,14 +160,14 @@ export const AnimatedTestimonials = ({
             <button
               onClick={handlePrev}
               className="group/button flex h-12 w-12 items-center justify-center rounded-full bg-gray-900 cursor-pointer hover:bg-primary/90 transition-all duration-300 shadow-md hover:shadow-lg"
-              aria-label="Anterior"
+              aria-label={t("gallery.prev")}
             >
               <IconArrowLeft className="h-5 w-5 text-white transition-transform duration-300 group-hover/button:-translate-x-1" />
             </button>
             <button
               onClick={handleNext}
               className="group/button flex h-12 w-12 items-center justify-center rounded-full bg-gray-900 cursor-pointer hover:bg-primary/90 transition-all duration-300 shadow-md hover:shadow-lg"
-              aria-label="Próximo"
+              aria-label={t("gallery.next")}
             >
               <IconArrowRight className="h-5 w-5 text-white transition-transform duration-300 group-hover/button:translate-x-1" />
             </button>

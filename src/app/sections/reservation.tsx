@@ -2,8 +2,11 @@
 
 import RotatingText from "@/app/components/RotatingText";
 import ReservationForm from "../components/ReservationForm";
+import { useTranslation } from "react-i18next";
 
 export function Reservation() {
+  const { t } = useTranslation();
+
   return (
     <section
       className="min-h-screen min-h-dvh flex items-center justify-center px-4 py-8 sm:px-6 sm:py-12"
@@ -17,7 +20,7 @@ export function Reservation() {
           <div className="text-center mb-6 sm:mb-8 animate-fade-up">
             <h1 className="font-serif text-2xl sm:text-3xl md:text-4xl lg:text-5xl text-white mb-2 sm:mb-3 leading-tight">
               <RotatingText
-                texts={["Solicite", "Agora Mesmo", "Seu Orçamento"]}
+                texts={[t("reservation.rotating1"), t("reservation.rotating2"), t("reservation.rotating3")]}
                 mainClassName="inline-block text-white"
                 elementLevelClassName="text-white"
                 rotationInterval={3000}
@@ -25,8 +28,7 @@ export function Reservation() {
               />
             </h1>
             <p className="text-sm sm:text-base md:text-lg text-white/80 max-w-xl mx-auto px-1">
-              Reserve sua estadia dos sonhos e aproveite momentos inesquecíveis
-              à beira-mar
+              {t("reservation.subtitle")}
             </p>
           </div>
 

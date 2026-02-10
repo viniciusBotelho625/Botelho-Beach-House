@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { format } from "date-fns";
-import { ptBR } from "date-fns/locale";
+import { ptBR, enUS } from "date-fns/locale";
 import { CalendarIcon, User, Send, Sun, Users, Moon, MapPin } from "lucide-react";
 import { useQuery } from "@tanstack/react-query";
 import { getAirbnbCalendar, type Booking } from "@/lib/airbnbCalendar";
@@ -13,8 +13,10 @@ import { Button } from "./ui/button";
 import { Calendar } from "./ui/calendar";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "./ui/select";
 import { Input } from "./ui/input";
+import { useTranslation } from "react-i18next";
 
 const ReservationForm = () => {
+  const { t, i18n } = useTranslation();
   const [checkIn, setCheckIn] = useState<Date>();
   const [checkOut, setCheckOut] = useState<Date>();
   const [checkInTime, setCheckInTime] = useState<string>("");
@@ -22,27 +24,26 @@ const ReservationForm = () => {
   const [guests, setGuests] = useState(1);
 
   const numberWhatsapp = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER;
+  const locale = i18n.language === "en" ? enUS : ptBR;
 
   const enviarWhatsApp = () => {
     const formatarData = (data: Date | undefined) => {
       if (!data) return "";
-  
-      return new Date(data).toLocaleDateString("pt-BR", {
+      return new Date(data).toLocaleDateString(i18n.language === "en" ? "en-US" : "pt-BR", {
         day: "2-digit",
         month: "2-digit",
         year: "numeric",
       });
     };
-  
-    const mensagem = 
-  `Olá! Gostaria de solicitar um orçamento
-  
-  *Nome:* ${name}
-  *Data de entrada:* ${formatarData(checkIn)}
-  *Data de saída:* ${formatarData(checkOut)}
-  *Horário de entrada:* ${checkInTime}
-  *Hóspedes:* ${guests}`;
-  
+
+    const mensagem =
+      `${t("reservation.whatsappMessage")}\n\n` +
+      `*${t("reservation.messageName")}:* ${name}\n` +
+      `*${t("reservation.messageCheckIn")}:* ${formatarData(checkIn)}\n` +
+      `*${t("reservation.messageCheckOut")}:* ${formatarData(checkOut)}\n` +
+      `*${t("reservation.messageTime")}:* ${checkInTime}\n` +
+      `*${t("reservation.messageGuests")}:* ${guests}`;
+
     const url = `https://wa.me/${numberWhatsapp}?text=${encodeURIComponent(mensagem)}`;
     window.open(url, "_blank");
   };
@@ -116,11 +117,11 @@ const ReservationForm = () => {
             {/* Text Content */}
             <div className="space-y-3 sm:space-y-4">
               <h2 className="font-serif text-xl sm:text-2xl md:text-3xl lg:text-4xl font-semibold text-white">
-                Reserve sua
-                <span className="block text-gradient-accent mt-1">Experiência</span>
+                {t("reservation.formTitle")}
+                <span className="block text-gradient-accent mt-1">{t("reservation.formTitleHighlight")}</span>
               </h2>
               <p className="text-white/75 text-xs sm:text-sm md:text-base max-w-sm leading-relaxed">
-                Preencha o formulário e receba seu orçamento personalizado em instantes via WhatsApp.
+                {t("reservation.formSubtitle")}
               </p>
             </div>
           </div>
@@ -129,9 +130,8 @@ const ReservationForm = () => {
           <div className="space-y-4 sm:space-y-5">
             {/* Date Row */}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              {/* Check-in Date */}
               <div className="space-y-2">
-                <Label className="reservation-label">Entrada</Label>
+                <Label className="reservation-label">{t("reservation.checkIn")}</Label>
                 <Popover>
                   <PopoverTrigger asChild>
                     <Button
@@ -142,7 +142,7 @@ const ReservationForm = () => {
                       )}
                     >
                       <CalendarIcon className="mr-2 h-4 w-4 shrink-0 text-primary" />
-                      <span className="truncate">{checkIn ? format(checkIn, "dd/MM/yyyy", { locale: ptBR }) : "Selecione"}</span>
+                      <span className="truncate">{checkIn ? format(checkIn, i18n.language === "en" ? "MM/dd/yyyy" : "dd/MM/yyyy", { locale }) : t("reservation.selectPlaceholder")}</span>
                     </Button>
                   </PopoverTrigger>
                   <PopoverContent className="w-auto p-0 bg-card border-border" align="start">
@@ -151,7 +151,7 @@ const ReservationForm = () => {
                       selected={checkIn}
                       onSelect={setCheckIn}
                       disabled={disabledDates}
-                      locale={ptBR}
+                      locale={locale}
                       initialFocus
                       className="p-3 pointer-events-auto"
                     />
@@ -159,9 +159,8 @@ const ReservationForm = () => {
                 </Popover>
               </div>
 
-              {/* Check-out Date */}
               <div className="space-y-2">
-                <Label className="reservation-label">Saída</Label>
+                <Label className="reservation-label">{t("reservation.checkOut")}</Label>
                 <Popover>
                   <PopoverTrigger asChild>
                     <Button
@@ -172,7 +171,7 @@ const ReservationForm = () => {
                       )}
                     >
                       <CalendarIcon className="mr-2 h-4 w-4 shrink-0 text-primary" />
-                      <span className="truncate">{checkOut ? format(checkOut, "dd/MM/yyyy", { locale: ptBR }) : "Selecione"}</span>
+                      <span className="truncate">{checkOut ? format(checkOut, i18n.language === "en" ? "MM/dd/yyyy" : "dd/MM/yyyy", { locale }) : t("reservation.selectPlaceholder")}</span>
                     </Button>
                   </PopoverTrigger>
                   <PopoverContent className="w-auto p-0 bg-card border-border" align="start">
@@ -181,7 +180,7 @@ const ReservationForm = () => {
                       selected={checkOut}
                       onSelect={setCheckOut}
                       disabled={disabledCheckOutDates}
-                      locale={ptBR}
+                      locale={locale}
                       initialFocus
                       className="p-3 pointer-events-auto"
                     />
@@ -190,64 +189,60 @@ const ReservationForm = () => {
               </div>
             </div>
 
-            {/* Guests */}
             <div className="space-y-2">
-              <Label className="reservation-label">Hóspedes</Label>
+              <Label className="reservation-label">{t("reservation.guests")}</Label>
               <div className="relative">
                 <Users className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-primary" />
                 <Input
                   type="number"
                   min={1}
                   max={10}
-                  placeholder="Quantidade"
+                  placeholder={t("reservation.guestsPlaceholder")}
                   value={guests}
                   onChange={(e) => setGuests(Number(e.target.value))}
                   className="pl-10 reservation-input border"
                 />
               </div>
             </div>
-            <div></div>
-              {/* Check-in Time */}
-              <div className="space-y-2">
-                <Label className="reservation-label">Horário de Entrada</Label>
-                <Select value={checkInTime} onValueChange={setCheckInTime}>
-                  <SelectTrigger className="w-full reservation-input border [&>span]:text-inherit">
-                    <SelectValue placeholder="Selecione o horário" />
-                  </SelectTrigger>
-                  <SelectContent className="bg-card border-border text-foreground">
-                    <SelectItem value="manha" className="cursor-pointer text-foreground focus:bg-muted focus:text-foreground">
-                      <div className="flex items-center gap-2">
-                        <Sun className="h-4 w-4 text-primary" />
-                        Manhã (09:00 - 12:00)
-                      </div>
-                    </SelectItem>
-                    <SelectItem value="noite" className="cursor-pointer text-foreground focus:bg-muted focus:text-foreground">
-                      <div className="flex items-center gap-2">
-                        <Moon className="h-4 w-4 text-primary" />
-                        Noite (18:00 - 22:00)
-                      </div>
-                    </SelectItem>
-                  </SelectContent>
-                </Select>
-              </div>
+            <div />
+            <div className="space-y-2">
+              <Label className="reservation-label">{t("reservation.checkInTime")}</Label>
+              <Select value={checkInTime} onValueChange={setCheckInTime}>
+                <SelectTrigger className="w-full reservation-input border [&>span]:text-inherit">
+                  <SelectValue placeholder={t("reservation.timePlaceholder")} />
+                </SelectTrigger>
+                <SelectContent className="bg-card border-border text-foreground">
+                  <SelectItem value="manha" className="cursor-pointer text-foreground focus:bg-muted focus:text-foreground">
+                    <div className="flex items-center gap-2">
+                      <Sun className="h-4 w-4 text-primary" />
+                      {t("reservation.morning")}
+                    </div>
+                  </SelectItem>
+                  <SelectItem value="noite" className="cursor-pointer text-foreground focus:bg-muted focus:text-foreground">
+                    <div className="flex items-center gap-2">
+                      <Moon className="h-4 w-4 text-primary" />
+                      {t("reservation.evening")}
+                    </div>
+                  </SelectItem>
+                </SelectContent>
+              </Select>
+            </div>
 
-              {/* Name */}
-              <div className="space-y-2">
-                <Label className="reservation-label">Seu Nome</Label>
-                <div className="relative">
-                  <User className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-primary" />
-                  <Input
-                    type="text"
-                    placeholder="Digite seu nome completo"
-                    value={name}
-                    onChange={(e) => setName(e.target.value)}
-                    className="pl-10 reservation-input border"
-                    maxLength={100}
-                  />
-                </div>
+            <div className="space-y-2">
+              <Label className="reservation-label">{t("reservation.yourName")}</Label>
+              <div className="relative">
+                <User className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-primary" />
+                <Input
+                  type="text"
+                  placeholder={t("reservation.namePlaceholder")}
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
+                  className="pl-10 reservation-input border"
+                  maxLength={100}
+                />
               </div>
+            </div>
 
-            {/* Submit Button */}
             <div className="pt-2 sm:pt-4">
               <Button
                 type="submit"
@@ -255,13 +250,13 @@ const ReservationForm = () => {
                 className="w-full h-12 text-sm sm:text-base font-medium rounded-xl reservation-btn group"
                 onClick={enviarWhatsApp}
               >
-                <span>Solicitar Orçamento</span>
+                <span>{t("reservation.submit")}</span>
                 <Send className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" />
               </Button>
             </div>
 
             <p className="text-center text-xs text-white/60 pt-2">
-              Você será redirecionado para o WhatsApp
+              {t("reservation.whatsappNote")}
             </p>
           </div>
         </div>

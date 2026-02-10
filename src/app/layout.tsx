@@ -16,7 +16,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="pt-br">
-      <body className="antialiased">
+      <body className="antialiased" suppressHydrationWarning>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link
           rel="preconnect"

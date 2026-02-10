@@ -4,54 +4,35 @@ import { useTranslation } from "react-i18next";
 import CircularGallery from "../components/CircularGallery";
 import { cloudinaryOptimize } from "@/lib/utils";
 
-const PLACES_RAW = [
-  {
-    image:
-      "https://res.cloudinary.com/dmeglebnu/image/upload/v1770213287/Cama_de_Anchieta_-_Itanha%C3%A9m_-_SP_jqeegq.jpg",
-    text: "Cama de Anchieta",
-  },
-  {
-    image:
-      "https://res.cloudinary.com/dmeglebnu/image/upload/v1770217378/WhatsApp_Image_2026-02-04_at_12.01.51_twqkqc.jpg",
-    text: "Passarela de Anchieta",
-  },
-  {
-    image:
-      "https://res.cloudinary.com/dmeglebnu/image/upload/v1770213939/Itanha%C3%A9m_vxhgyn.jpg",
-    text: "Praia Cibratel",
-  },
-  {
-    image:
-      "https://res.cloudinary.com/dmeglebnu/image/upload/v1770216030/unnamed_zgoims.webp",
-    text: "Morro do Paranambuco",
-  },
-  {
-    image:
-      "https://res.cloudinary.com/dmeglebnu/image/upload/v1770216216/unnamed_1_h8szat.jpg",
-    text: "Estátua Mulheres de Areia",
-  },
-  {
-    image:
-      "https://res.cloudinary.com/dmeglebnu/image/upload/v1770216829/unnamed_2_tskt2g.webp",
-    text: "Centrinho da Cidade",
-  },
-  {
-    image:
-      "https://res.cloudinary.com/dmeglebnu/image/upload/v1770217160/Praia-do-Suarao-Itanhaem-Praiao-SP_q17x4r.jpg",
-    text: "Praia do Suarão",
-  },
-  {
-    image:
-      "https://res.cloudinary.com/dmeglebnu/image/upload/v1770217379/WhatsApp_Image_2026-02-04_at_12.01.51_1_blwj9d.jpg",
-    text: "Praia do Sonho",
-  },
+const PLACES_KEYS = {
+  camaAnchieta: true,
+  passarelaAnchieta: true,
+  praiaCibratel: true,
+  morroParanambuco: true,
+  mulheresAreia: true,
+  centrinho: true,
+  praiaSuarao: true,
+  praiaSonho: true,
+} as const;
+
+type PlaceKey = keyof typeof PLACES_KEYS;
+
+const PLACES_RAW: { image: string; textKey: PlaceKey }[] = [
+  { image: "https://res.cloudinary.com/dmeglebnu/image/upload/v1770213287/Cama_de_Anchieta_-_Itanha%C3%A9m_-_SP_jqeegq.jpg", textKey: "camaAnchieta" },
+  { image: "https://res.cloudinary.com/dmeglebnu/image/upload/v1770217378/WhatsApp_Image_2026-02-04_at_12.01.51_twqkqc.jpg", textKey: "passarelaAnchieta" },
+  { image: "https://res.cloudinary.com/dmeglebnu/image/upload/v1770213939/Itanha%C3%A9m_vxhgyn.jpg", textKey: "praiaCibratel" },
+  { image: "https://res.cloudinary.com/dmeglebnu/image/upload/v1770216030/unnamed_zgoims.webp", textKey: "morroParanambuco" },
+  { image: "https://res.cloudinary.com/dmeglebnu/image/upload/v1770216216/unnamed_1_h8szat.jpg", textKey: "mulheresAreia" },
+  { image: "https://res.cloudinary.com/dmeglebnu/image/upload/v1770216829/unnamed_2_tskt2g.webp", textKey: "centrinho" },
+  { image: "https://res.cloudinary.com/dmeglebnu/image/upload/v1770217160/Praia-do-Suarao-Itanhaem-Praiao-SP_q17x4r.jpg", textKey: "praiaSuarao" },
+  { image: "https://res.cloudinary.com/dmeglebnu/image/upload/v1770217379/WhatsApp_Image_2026-02-04_at_12.01.51_1_blwj9d.jpg", textKey: "praiaSonho" },
 ];
 
 export function Places() {
   const { t } = useTranslation();
   const places = PLACES_RAW.map((p) => ({
-    ...p,
     image: cloudinaryOptimize(p.image),
+    text: t(`places.items.${p.textKey}`),
   }));
 
   return (
@@ -78,10 +59,9 @@ export function Places() {
           scrollSpeed={1.8}
         />
 
-        {/* Info text */}
         <div className="py-8 text-center">
           <p className="text-sm text-gray-500">
-            Arraste para explorar os pontos turísticos da região
+            {t("places.dragHint")}
           </p>
         </div>
       </div>

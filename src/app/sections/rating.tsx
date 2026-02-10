@@ -1,9 +1,10 @@
 "use client";
 
 import { InfiniteMovingCards } from "@/app/components/ui/infinite-moving-cards";
-import { Star, ExternalLink } from "lucide-react";
+import { Star } from "lucide-react";
 import CountUp from "@/app/components/ui/count-up";
 import { useGoogleReviews } from "@/hooks/useGoogleReviews";
+import { useTranslation } from "react-i18next";
 import Link from "next/link";
 
 const GOOGLE_MAPS_LINK =
@@ -12,6 +13,7 @@ const AIRBNB_LINK =
   "https://www.airbnb.com.br/rooms/1358899180534366297/reviews?photo_id=2091219424&source_impression_id=p3_1769961819_P385MsgB7dN0kRLw&previous_page_section_name=1000";
 
 export function Rating() {
+  const { t } = useTranslation();
   const {
     reviews,
     rating,
@@ -29,25 +31,24 @@ export function Rating() {
       <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 mb-8 sm:mb-12">
         <div className="text-center mb-3 sm:mb-4">
           <p className="text-xs sm:text-sm uppercase tracking-wider text-blue-600 font-medium">
-            DEPOIMENTOS
+            {t("reviews.sectionLabel")}
           </p>
         </div>
 
         <div className="text-center mb-3 sm:mb-4">
           <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold">
-            <span className="text-gray-900">O Que Nossos</span>
-            <span className="text-blue-600"> Hóspedes Dizem</span>
+            <span className="text-gray-900">{t("reviews.titlePrefix")}</span>
+            <span className="text-blue-600">{t("reviews.titleHighlight")}</span>
           </h2>
         </div>
 
         <div className="text-center mb-6 sm:mb-8">
           <p className="text-sm sm:text-base md:text-lg lg:text-xl text-gray-600 max-w-3xl mx-auto px-4">
-            Mais de{" "}
+            {t("reviews.introBefore")}
             <span className="font-bold">
               <CountUp end={40} duration={2} />
-            </span>{" "}
-            hospedagens concluídas com sucesso. Um histórico que transmite
-            segurança, credibilidade e excelência em cada estadia.
+            </span>
+            {t("reviews.introAfter")}
           </p>
         </div>
 
@@ -70,7 +71,7 @@ export function Rating() {
             </div>
 
             <p className="text-sm text-gray-600 text-center mb-6">
-              Baseado em {totalReviews} avaliações
+              {t("reviews.based")} {totalReviews} {t("reviews.reviewsCount")}
             </p>
 
             {/* Estatísticas por plataforma */}
@@ -97,7 +98,7 @@ export function Rating() {
                       {googleRating.toFixed(1).replace(".", ",")} · Google
                     </div>
                     <div className="text-xs text-blue-600">
-                      {googleTotal} avaliações
+                      {googleTotal} {t("reviews.reviewsCount")}
                     </div>
                   </div>
                 </Link>
@@ -125,7 +126,7 @@ export function Rating() {
                       {airbnbRating.toFixed(1).replace(".", ",")} · Airbnb
                     </div>
                     <div className="text-xs text-pink-600">
-                      {airbnbTotal} avaliações
+                      {airbnbTotal} {t("reviews.reviewsCount")}
                     </div>
                   </div>
                 </Link>
@@ -135,13 +136,13 @@ export function Rating() {
 
           {error && (
             <div className="text-center text-xs text-amber-600 mt-4">
-              ⚠️ Avaliações em modo offline
+              ⚠️ {t("reviews.offline")}
             </div>
           )}
 
           {isLoading && reviews.length === 0 && (
             <div className="text-center text-sm text-gray-500 mt-4">
-              Carregando avaliações do Google...
+              {t("reviews.loading")}
             </div>
           )}
         </div>

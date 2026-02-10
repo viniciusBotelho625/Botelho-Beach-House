@@ -37,52 +37,36 @@ export function Footer() {
               Botelho Beach House
             </h2>
             <p className="text-white/90 leading-relaxed text-sm">
-              Sua casa de praia dos sonhos com piscina privativa, vista para o
-              mar e todas as comodidades para férias inesquecíveis.
+              {t("footer.tagline")}
             </p>
           </div>
 
           <div className="space-y-4">
-            <h3 className="text-xl font-bold text-white mb-4">Links Rápidos</h3>
+            <h3 className="text-xl font-bold text-white mb-4">{t("footer.quickLinks")}</h3>
             <ul className="space-y-3">
               <li>
-                <a
-                  href="#inicio"
-                  className="text-white/90 hover:text-white transition-colors duration-300 text-sm"
-                >
-                  Início
+                <a href="#inicio" className="text-white/90 hover:text-white transition-colors duration-300 text-sm">
+                  {t("footer.home")}
                 </a>
               </li>
               <li>
-                <a
-                  href="#fotos"
-                  className="text-white/90 hover:text-white transition-colors duration-300 text-sm"
-                >
-                  Fotos
+                <a href="#fotos" className="text-white/90 hover:text-white transition-colors duration-300 text-sm">
+                  {t("footer.photos")}
                 </a>
               </li>
               <li>
-                <a
-                  href="#comodidades"
-                  className="text-white/90 hover:text-white transition-colors duration-300 text-sm"
-                >
-                  Comodidades
+                <a href="#comodidades" className="text-white/90 hover:text-white transition-colors duration-300 text-sm">
+                  {t("footer.amenities")}
                 </a>
               </li>
               <li>
-                <a
-                  href="#avaliacoes"
-                  className="text-white/90 hover:text-white transition-colors duration-300 text-sm"
-                >
-                  Avaliações
+                <a href="#avaliacoes" className="text-white/90 hover:text-white transition-colors duration-300 text-sm">
+                  {t("footer.reviews")}
                 </a>
               </li>
               <li>
-                <a
-                  href="#reservar"
-                  className="text-white/90 hover:text-white transition-colors duration-300 text-sm"
-                >
-                  Reservar
+                <a href="#reservar" className="text-white/90 hover:text-white transition-colors duration-300 text-sm">
+                  {t("footer.reserve")}
                 </a>
               </li>
             </ul>
@@ -134,21 +118,21 @@ export function Footer() {
           </div>
 
           <div className="space-y-4">
-            <h3 className="text-xl font-bold text-white mb-4">Horários</h3>
+            <h3 className="text-xl font-bold text-white mb-4">{t("footer.hours")}</h3>
             <ul className="space-y-3 text-white/90 text-sm">
               <li>
-                Check-in: <span className="text-[#3fbbd0]">09:00</span>
+                {t("footer.checkIn")}: <span className="text-[#3fbbd0]">09:00</span>
               </li>
               <li>
-                Check-out: <span className="text-[#3fbbd0]">16:00</span>
+                {t("footer.checkOut")}: <span className="text-[#3fbbd0]">16:00</span>
               </li>
               <li>
-                Atendimento: <span className="text-[#3fbbd0]">8h - 22h</span>
+                {t("footer.serviceHours")}: <span className="text-[#3fbbd0]">8h - 22h</span>
               </li>
             </ul>
             <div className="mt-6 bg-[#3fbbd0]/20 rounded-lg p-4 border border-[#3fbbd0]/30">
               <p className="text-white text-sm leading-relaxed">
-                Respondemos em até 2 horas durante o horário de atendimento
+                {t("footer.serviceNote")}
               </p>
             </div>
           </div>
@@ -157,12 +141,12 @@ export function Footer() {
         <div className="border-t border-white/10 pt-6 sm:pt-8 mt-6 sm:mt-8">
           <div className="flex flex-col sm:flex-row justify-between items-center gap-3 sm:gap-4">
             <p className="text-white/80 text-xs sm:text-sm text-center sm:text-left">
-              © {currentYear} Botelho Beach House. Todos os direitos reservados.
+              © {currentYear} Botelho Beach House. {t("footer.rights")}
             </p>
             <div className="flex items-center gap-1.5 sm:gap-2 text-white/80 text-xs sm:text-sm">
-              <span>Feito com</span>
+              <span>{t("footer.madeWith")}</span>
               <Heart className="h-3 w-3 sm:h-4 sm:w-4 text-[#3fbbd0] fill-[#3fbbd0]" />
-              <span>para suas férias perfeitas</span>
+              <span>{t("footer.madeWithLove")}</span>
             </div>
           </div>
         </div>

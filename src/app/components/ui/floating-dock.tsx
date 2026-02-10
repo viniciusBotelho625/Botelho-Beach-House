@@ -3,6 +3,7 @@ import { useState } from "react";
 import { Home, Calendar, Camera, Star } from "lucide-react";
 import { motion } from "motion/react";
 import { cn } from "@/lib/utils";
+import { useTranslation } from "react-i18next";
 
 interface LinkItem {
   title: string;
@@ -11,29 +12,14 @@ interface LinkItem {
 }
 
 const FloatingDock = () => {
+  const { t } = useTranslation();
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
 
   const links: LinkItem[] = [
-    {
-      title: "Home",
-      icon: <Home className="h-5 w-5" />,
-      href: "#",
-    },
-    {
-      title: "Calendário",
-      icon: <Calendar className="h-5 w-5" />,
-      href: "#",
-    },
-    {
-      title: "Fotos",
-      icon: <Camera className="h-5 w-5" />,
-      href: "#",
-    },
-    {
-      title: "Avaliações",
-      icon: <Star className="h-5 w-5" />,
-      href: "#",
-    },
+    { title: t("dock.home"), icon: <Home className="h-5 w-5" />, href: "#" },
+    { title: t("dock.calendar"), icon: <Calendar className="h-5 w-5" />, href: "#" },
+    { title: t("dock.photos"), icon: <Camera className="h-5 w-5" />, href: "#" },
+    { title: t("dock.reviews"), icon: <Star className="h-5 w-5" />, href: "#" },
   ];
 
   return (
