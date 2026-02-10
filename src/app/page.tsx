@@ -2,8 +2,8 @@ import { Photos } from "./sections/photos";
 import { Places } from "./sections/places";
 import { Rating } from "./sections/rating";
 import { Footer } from "./sections/footer";
-import { Amenities } from "./sections/amenities";
-import { Hero } from "./sections/hero";
+import { Amenities } from "./sections/amenitiesname";
+import { Hero } from "./sections/heroname";
 import { Reservation } from "./sections/reservation";
 
 export default function Home() {

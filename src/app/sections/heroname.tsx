@@ -14,7 +14,7 @@ export const Hero = () => {
           alt="Casa de praia ao pôr do sol"
           fill
           priority
-          sizes="100vw"
+          sizes="100dvh"
           className="object-cover object-center"
         />
         <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/20 to-black/50" />
