@@ -55,12 +55,12 @@ export const InfiniteMovingCards = ({
       if (direction === "left") {
         containerRef.current.style.setProperty(
           "--animation-direction",
-          "forwards"
+          "forwards",
         );
       } else {
         containerRef.current.style.setProperty(
           "--animation-direction",
-          "reverse"
+          "reverse",
         );
       }
     }
@@ -86,7 +86,7 @@ export const InfiniteMovingCards = ({
           "w-4 h-4",
           i < rating
             ? "fill-yellow-400 text-yellow-400"
-            : "fill-gray-200 text-gray-200"
+            : "fill-gray-200 text-gray-200",
         )}
       />
     ));
@@ -121,7 +121,7 @@ export const InfiniteMovingCards = ({
       className={cn(
         "infinite-cards-scroller relative z-20 max-w-8xl overflow-hidden [mask-image:linear-gradient(to_right,transparent,white_20%,white_80%,transparent)]",
         pauseOnHover ? "pause-on-hover" : "",
-        className ?? ""
+        className ?? "",
       )}
     >
       <style jsx>{`
@@ -146,7 +146,7 @@ export const InfiniteMovingCards = ({
         ref={scrollerRef}
         className={cn(
           "flex w-max min-w-full shrink-0 flex-nowrap gap-6 py-4",
-          start ? "animate-scroll" : ""
+          start ? "animate-scroll" : "",
         )}
       >
         {items.map((item, idx) => (
@@ -178,7 +178,7 @@ export const InfiniteMovingCards = ({
                   <div
                     className={cn(
                       "w-10 h-10 rounded-full bg-gradient-to-br flex items-center justify-center text-white font-semibold text-sm shadow-md",
-                      gradients[idx % gradients.length]
+                      gradients[idx % gradients.length],
                     )}
                   >
                     {getInitials(item.name)}
@@ -194,7 +194,7 @@ export const InfiniteMovingCards = ({
                             "text-xs px-2 py-0.5 rounded-full font-medium",
                             item.source === "google"
                               ? "bg-blue-100 text-blue-700"
-                              : "bg-pink-100 text-pink-700"
+                              : "bg-pink-100 text-pink-700",
                           )}
                         >
                           {item.source === "google" ? "Google" : "Airbnb"}

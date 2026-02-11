@@ -72,17 +72,50 @@ const resources = {
         title: "Galeria de Fotos",
         subtitle: "Conheça Nossa Casa",
         cards: {
-          pool: { title: "Piscina", desc: "Piscina moderna de 5 metros de comprimento e 2,30m de largura com 1,40m de profundidade" },
-          decoration: { title: "Decoração", desc: "Piscina com jardim artificial e iluminação LED RGB para fotos incríveis." },
-          external: { title: "Área Externa", desc: "Piscina privativa com cascata" },
-          lateral: { title: "Vista Lateral", desc: "Casa de esquina equipada com cerca elétrica e câmeras de segurança." },
-          garage: { title: "Garagem", desc: "Garagem com 3 vagas privativas e segura no local." },
-          living: { title: "Sala de Estar", desc: "Sala de estar com Smart TV 50\" e sofá cama para 2 pessoas." },
-          gourmet: { title: "Espaço Gourmet", desc: "Espaço gourmet com churrasqueira e área de lazer para relaxar." },
-          kitchen: { title: "Cozinha", desc: "Cozinha com geladeira, cooktop e utensílios de cozinha para preparação de refeições." },
-          bathroom: { title: "Banheiros", desc: "Casa com 2 banheiros e 1 lavabo, equipados com água quente e chuveiro elétrico." },
-          room1: { title: "Quarto 1", desc: "Quarto 1 suíte com 2 camas de solteiro e 1 cama de casal, equipado com ventilador de teto." },
-          room2: { title: "Quarto 2", desc: "Quarto 2 suíte com 2 camas de solteiro e 1 cama de casal, equipado com ventilador de teto." },
+          pool: {
+            title: "Piscina",
+            desc: "Piscina moderna de 5 metros de comprimento e 2,30m de largura com 1,40m de profundidade",
+          },
+          decoration: {
+            title: "Decoração",
+            desc: "Piscina com jardim artificial e iluminação LED RGB para fotos incríveis.",
+          },
+          external: {
+            title: "Área Externa",
+            desc: "Piscina privativa com cascata",
+          },
+          lateral: {
+            title: "Vista Lateral",
+            desc: "Casa de esquina equipada com cerca elétrica e câmeras de segurança.",
+          },
+          garage: {
+            title: "Garagem",
+            desc: "Garagem com 3 vagas privativas e segura no local.",
+          },
+          living: {
+            title: "Sala de Estar",
+            desc: 'Sala de estar com Smart TV 50" e sofá cama para 2 pessoas.',
+          },
+          gourmet: {
+            title: "Espaço Gourmet",
+            desc: "Espaço gourmet com churrasqueira e área de lazer para relaxar.",
+          },
+          kitchen: {
+            title: "Cozinha",
+            desc: "Cozinha com geladeira, cooktop e utensílios de cozinha para preparação de refeições.",
+          },
+          bathroom: {
+            title: "Banheiros",
+            desc: "Casa com 2 banheiros e 1 lavabo, equipados com água quente e chuveiro elétrico.",
+          },
+          room1: {
+            title: "Quarto 1",
+            desc: "Quarto 1 suíte com 2 camas de solteiro e 1 cama de casal, equipado com ventilador de teto.",
+          },
+          room2: {
+            title: "Quarto 2",
+            desc: "Quarto 2 suíte com 2 camas de solteiro e 1 cama de casal, equipado com ventilador de teto.",
+          },
         },
       },
       places: {
@@ -106,9 +139,11 @@ const resources = {
         subtitle: "O Que Nossos Hóspedes Dizem",
         titlePrefix: "O Que Nossos ",
         titleHighlight: "Hóspedes Dizem",
-        intro: "Mais de {{count}} hospedagens concluídas com sucesso. Um histórico que transmite segurança, credibilidade e excelência em cada estadia.",
+        intro:
+          "Mais de {{count}} hospedagens concluídas com sucesso. Um histórico que transmite segurança, credibilidade e excelência em cada estadia.",
         introBefore: "Mais de ",
-        introAfter: " hospedagens concluídas com sucesso. Um histórico que transmite segurança, credibilidade e excelência em cada estadia.",
+        introAfter:
+          " hospedagens concluídas com sucesso. Um histórico que transmite segurança, credibilidade e excelência em cada estadia.",
         based: "Baseado em",
         reviewsCount: "avaliações",
         reviews_count: "avaliações",
@@ -120,7 +155,8 @@ const resources = {
         offline: "Avaliações em modo offline",
       },
       footer: {
-        tagline: "Sua casa de praia dos sonhos com piscina privativa, vista para o mar e todas as comodidades para férias inesquecíveis.",
+        tagline:
+          "Sua casa de praia dos sonhos com piscina privativa, vista para o mar e todas as comodidades para férias inesquecíveis.",
         quickLinks: "Links Rápidos",
         home: "Início",
         photos: "Fotos",
@@ -132,7 +168,8 @@ const resources = {
         checkIn: "Check-in",
         checkOut: "Check-out",
         serviceHours: "Atendimento",
-        serviceNote: "Respondemos em até 2 horas durante o horário de atendimento",
+        serviceNote:
+          "Respondemos em até 2 horas durante o horário de atendimento",
         rights: "Todos os direitos reservados",
         madeWith: "Feito com",
         madeWithLove: "para suas férias perfeitas",
@@ -141,10 +178,12 @@ const resources = {
         rotating1: "Solicite",
         rotating2: "Agora Mesmo",
         rotating3: "Seu Orçamento",
-        subtitle: "Reserve sua estadia dos sonhos e aproveite momentos inesquecíveis à beira-mar",
+        subtitle:
+          "Reserve sua estadia dos sonhos e aproveite momentos inesquecíveis à beira-mar",
         formTitle: "Reserve sua",
         formTitleHighlight: "Experiência",
-        formSubtitle: "Preencha o formulário e receba seu orçamento personalizado em instantes via WhatsApp.",
+        formSubtitle:
+          "Preencha o formulário e receba seu orçamento personalizado em instantes via WhatsApp.",
         checkIn: "Entrada",
         checkOut: "Saída",
         guests: "Hóspedes",
@@ -154,7 +193,7 @@ const resources = {
         morning: "Manhã (09:00 - 12:00)",
         evening: "Noite (18:00 - 22:00)",
         yourName: "Seu Nome",
-        namePlaceholder: "Digite seu nome completo",
+        namePlaceholder: "Digite seu nome",
         guestsPlaceholder: "Quantidade",
         submit: "Solicitar Orçamento",
         whatsappNote: "Você será redirecionado para o WhatsApp",
@@ -232,17 +271,50 @@ const resources = {
         title: "Photo Gallery",
         subtitle: "Discover Our House",
         cards: {
-          pool: { title: "Pool", desc: "Modern 5m long, 2.30m wide pool with 1.40m depth" },
-          decoration: { title: "Decoration", desc: "Pool with artificial garden and RGB LED lighting for amazing photos." },
-          external: { title: "Outdoor Area", desc: "Private pool with waterfall" },
-          lateral: { title: "Side View", desc: "Corner house with electric fence and security cameras." },
-          garage: { title: "Garage", desc: "Garage with 3 private parking spaces on site." },
-          living: { title: "Living Room", desc: "Living room with 50\" Smart TV and sofa bed for 2." },
-          gourmet: { title: "Gourmet Space", desc: "Gourmet space with barbecue and leisure area to relax." },
-          kitchen: { title: "Kitchen", desc: "Kitchen with fridge, cooktop and utensils for meal preparation." },
-          bathroom: { title: "Bathrooms", desc: "House with 2 bathrooms and 1 powder room, hot water and electric shower." },
-          room1: { title: "Bedroom 1", desc: "Bedroom 1 suite with 2 single beds and 1 double bed, ceiling fan." },
-          room2: { title: "Bedroom 2", desc: "Bedroom 2 suite with 2 single beds and 1 double bed, ceiling fan." },
+          pool: {
+            title: "Pool",
+            desc: "Modern 5m long, 2.30m wide pool with 1.40m depth",
+          },
+          decoration: {
+            title: "Decoration",
+            desc: "Pool with artificial garden and RGB LED lighting for amazing photos.",
+          },
+          external: {
+            title: "Outdoor Area",
+            desc: "Private pool with waterfall",
+          },
+          lateral: {
+            title: "Side View",
+            desc: "Corner house with electric fence and security cameras.",
+          },
+          garage: {
+            title: "Garage",
+            desc: "Garage with 3 private parking spaces on site.",
+          },
+          living: {
+            title: "Living Room",
+            desc: 'Living room with 50" Smart TV and sofa bed for 2.',
+          },
+          gourmet: {
+            title: "Gourmet Space",
+            desc: "Gourmet space with barbecue and leisure area to relax.",
+          },
+          kitchen: {
+            title: "Kitchen",
+            desc: "Kitchen with fridge, cooktop and utensils for meal preparation.",
+          },
+          bathroom: {
+            title: "Bathrooms",
+            desc: "House with 2 bathrooms and 1 powder room, hot water and electric shower.",
+          },
+          room1: {
+            title: "Bedroom 1",
+            desc: "Bedroom 1 suite with 2 single beds and 1 double bed, ceiling fan.",
+          },
+          room2: {
+            title: "Bedroom 2",
+            desc: "Bedroom 2 suite with 2 single beds and 1 double bed, ceiling fan.",
+          },
         },
       },
       places: {
@@ -266,9 +338,11 @@ const resources = {
         subtitle: "What Our Guests Say",
         titlePrefix: "What Our ",
         titleHighlight: "Guests Say",
-        intro: "Over {{count}} successful stays. A track record that conveys safety, credibility and excellence in every stay.",
+        intro:
+          "Over {{count}} successful stays. A track record that conveys safety, credibility and excellence in every stay.",
         introBefore: "Over ",
-        introAfter: " successful stays. A track record that conveys safety, credibility and excellence in every stay.",
+        introAfter:
+          " successful stays. A track record that conveys safety, credibility and excellence in every stay.",
         based: "Based on",
         reviewsCount: "reviews",
         reviews_count: "reviews",
@@ -280,7 +354,8 @@ const resources = {
         offline: "Reviews in offline mode",
       },
       footer: {
-        tagline: "Your dream beach house with private pool, sea view and all the comforts for an unforgettable vacation.",
+        tagline:
+          "Your dream beach house with private pool, sea view and all the comforts for an unforgettable vacation.",
         quickLinks: "Quick Links",
         home: "Home",
         photos: "Photos",
@@ -301,10 +376,12 @@ const resources = {
         rotating1: "Request",
         rotating2: "Right Now",
         rotating3: "Your Quote",
-        subtitle: "Book your dream stay and enjoy unforgettable moments by the sea",
+        subtitle:
+          "Book your dream stay and enjoy unforgettable moments by the sea",
         formTitle: "Book your",
         formTitleHighlight: "Experience",
-        formSubtitle: "Fill out the form and get your personalized quote via WhatsApp in minutes.",
+        formSubtitle:
+          "Fill out the form and get your personalized quote via WhatsApp in minutes.",
         checkIn: "Check-in",
         checkOut: "Check-out",
         guests: "Guests",
@@ -314,7 +391,7 @@ const resources = {
         morning: "Morning (09:00 - 12:00)",
         evening: "Evening (18:00 - 22:00)",
         yourName: "Your Name",
-        namePlaceholder: "Enter your full name",
+        namePlaceholder: "Enter your name",
         guestsPlaceholder: "Quantity",
         submit: "Request Quote",
         whatsappNote: "You will be redirected to WhatsApp",

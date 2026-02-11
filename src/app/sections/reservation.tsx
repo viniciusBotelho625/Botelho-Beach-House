@@ -9,6 +9,7 @@ export function Reservation() {
 
   return (
     <section
+      id="reservation"
       className="min-h-screen min-h-dvh flex items-center justify-center px-4 py-8 sm:px-6 sm:py-12"
       style={{
         background:

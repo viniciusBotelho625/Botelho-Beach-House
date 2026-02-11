@@ -17,8 +17,6 @@ export async function GET() {
   }
 
   try {
-    console.log("🔍 Buscando calendário Airbnb de:", AIRBNB_ICAL_URL);
-
     // No Next.js 16, usar fetch com configuração explícita
     let response;
     try {

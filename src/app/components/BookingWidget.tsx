@@ -6,7 +6,7 @@ import {
   ChevronDownIcon,
   Plus,
   Minus,
-  CalendarIcon
+  CalendarIcon,
 } from "lucide-react";
 import { Calendar } from "./ui/calendar";
 import { useTranslation } from "react-i18next";
@@ -25,6 +25,7 @@ const BookingWidget = () => {
   const [checkOutOpen, setCheckOutOpen] = useState(false);
   const [checkInDate, setCheckInDate] = useState<Date | undefined>(undefined);
   const [checkOutDate, setCheckOutDate] = useState<Date | undefined>(undefined);
+
   const [guests, setGuests] = useState({
     adultos: 0,
     criancas: 0,
@@ -87,6 +88,10 @@ const BookingWidget = () => {
     return dateToCheck < today || isDateBooked(date);
   };
 
+  const handleCloseConfirmModal = () => {
+    setGuestsPopoverOpen(false);
+  };
+
   return (
     <div className="w-full max-w-8xl mx-auto px-2 sm:px-4 lg:px-10">
       <div className="bg-[hsl(var(--glass-bg))]/80 backdrop-blur-md rounded-lg px-3 sm:px-6 lg:px-20 py-4 sm:py-6 lg:py-10 border border-white/10">
@@ -94,26 +99,37 @@ const BookingWidget = () => {
           {/* Data Picker */}
           <div className="w-full md:w-auto">
             <div className="flex flex-col gap-2 border-b border-white/20 pb-3">
-              <Label htmlFor="date-picker" className="text-white/70 text-xs sm:text-sm md:text-md uppercase tracking-widest font-light">
+              <Label
+                htmlFor="date-picker"
+                className="text-white/70 text-xs sm:text-sm md:text-md uppercase tracking-widest font-light"
+              >
                 {t("hero.dataLabel")}
               </Label>
               <Popover open={checkOutOpen} onOpenChange={setCheckOutOpen}>
                 <PopoverTrigger asChild>
-                  <Button variant="outline" id="checkout-date-picker" className="w-full md:w-60 justify-between font-normal bg-transparent hover:bg-transparent hover:text-white/50 border-none shadow-none text-white/70 p-0! cursor-pointer text-xs sm:text-sm h-auto">
+                  <Button
+                    variant="outline"
+                    id="checkout-date-picker"
+                    className="w-full md:w-60 justify-between font-normal bg-transparent hover:bg-transparent hover:text-white/50 border-none shadow-none text-white/70 p-0! cursor-pointer text-xs sm:text-sm h-auto"
+                  >
                     <div className="flex items-center gap-2">
                       <CalendarIcon className="h-4 w-4 shrink-0" />
-                    <span className="truncate">
-                      {checkInDate && checkOutDate
-                        ? `${checkInDate.toLocaleDateString("pt-BR")} - ${checkOutDate.toLocaleDateString("pt-BR")}`
-                        : checkInDate
-                          ? `${checkInDate.toLocaleDateString("pt-BR")} - Selecione saída`
-                          : t("hero.data")}
-                    </span>
+                      <span className="truncate">
+                        {checkInDate && checkOutDate
+                          ? `${checkInDate.toLocaleDateString("pt-BR")} - ${checkOutDate.toLocaleDateString("pt-BR")}`
+                          : checkInDate
+                            ? `${checkInDate.toLocaleDateString("pt-BR")} - Selecione saída`
+                            : t("hero.data")}
+                      </span>
                     </div>
                     <ChevronDownIcon className="ml-2 h-4 w-4 shrink-0" />
                   </Button>
                 </PopoverTrigger>
-                <PopoverContent className="w-auto bg-[#03303E]/70 backdrop-blur-xl border-white/30 rounded-lg shadow-2xl text-white" align="end" onOpenAutoFocus={(e) => e.preventDefault()}>
+                <PopoverContent
+                  className="w-auto bg-[#03303E]/70 backdrop-blur-xl border-white/30 rounded-lg shadow-2xl text-white"
+                  align="end"
+                  onOpenAutoFocus={(e) => e.preventDefault()}
+                >
                   <div className="flex flex-col gap-2">
                     {(checkInDate || checkOutDate) && (
                       <button
@@ -138,36 +154,46 @@ const BookingWidget = () => {
                       disabled={disabledDates}
                       excludeDisabled
                       modifiers={{ booked: (date) => isDateBooked(date) }}
-                    modifiersClassNames={{ booked: "opacity-40 line-through cursor-not-allowed text-red-300/50" }}
-                    classNames={{ day_disabled: "opacity-40 line-through cursor-not-allowed text-red-300" }}
-                    onSelect={(range: DateRange | undefined) => {
-                      if (range) {
-                        const today = new Date();
-                        today.setHours(0, 0, 0, 0);
-                        if (range.from) {
-                          const fromNorm = new Date(range.from);
-                          fromNorm.setHours(0, 0, 0, 0);
-                          if (fromNorm < today) return;
-                          if (isDateBooked(range.from)) return;
+                      modifiersClassNames={{
+                        booked:
+                          "opacity-40 line-through cursor-not-allowed text-red-300/50",
+                      }}
+                      classNames={{
+                        day_disabled:
+                          "opacity-40 line-through cursor-not-allowed text-red-300",
+                      }}
+                      onSelect={(range: DateRange | undefined) => {
+                        if (range) {
+                          const today = new Date();
+                          today.setHours(0, 0, 0, 0);
+                          if (range.from) {
+                            const fromNorm = new Date(range.from);
+                            fromNorm.setHours(0, 0, 0, 0);
+                            if (fromNorm < today) return;
+                            if (isDateBooked(range.from)) return;
+                          }
+                          if (range.to) {
+                            const toNorm = new Date(range.to);
+                            toNorm.setHours(0, 0, 0, 0);
+                            if (toNorm < today) return;
+                            if (isDateBooked(range.to)) return;
+                            if (
+                              range.from &&
+                              isRangeIncludingBookedDays(range.from, range.to)
+                            )
+                              return;
+                          }
+                          setCheckInDate(range.from);
+                          setCheckOutDate(range.to ?? undefined);
+                          if (range.from && range.to) {
+                            setTimeout(() => setCheckOutOpen(false), 100);
+                          }
+                        } else {
+                          setCheckInDate(undefined);
+                          setCheckOutDate(undefined);
                         }
-                        if (range.to) {
-                          const toNorm = new Date(range.to);
-                          toNorm.setHours(0, 0, 0, 0);
-                          if (toNorm < today) return;
-                          if (isDateBooked(range.to)) return;
-                          if (range.from && isRangeIncludingBookedDays(range.from, range.to)) return;
-                        }
-                        setCheckInDate(range.from);
-                        setCheckOutDate(range.to ?? undefined);
-                        if (range.from && range.to) {
-                          setTimeout(() => setCheckOutOpen(false), 100);
-                        }
-                      } else {
-                        setCheckInDate(undefined);
-                        setCheckOutDate(undefined);
-                      }
-                    }}
-                  />
+                      }}
+                    />
                   </div>
                 </PopoverContent>
               </Popover>
@@ -177,10 +203,18 @@ const BookingWidget = () => {
           {/* Guests Picker */}
           <div className="w-full md:w-auto">
             <div className="flex flex-col gap-2 border-b border-white/20 pb-3">
-              <Label className="text-white/70 text-xs sm:text-sm md:text-md uppercase tracking-widest font-light">{t("hero.guestsLabel")}</Label>
-              <Popover open={guestsPopoverOpen} onOpenChange={setGuestsPopoverOpen}>
+              <Label className="text-white/70 text-xs sm:text-sm md:text-md uppercase tracking-widest font-light">
+                {t("hero.guestsLabel")}
+              </Label>
+              <Popover
+                open={guestsPopoverOpen}
+                onOpenChange={setGuestsPopoverOpen}
+              >
                 <PopoverTrigger asChild>
-                  <Button variant="outline" className="w-full md:w-60 justify-between font-normal border-none shadow-none text-white/70 cursor-pointer p-0! bg-transparent hover:bg-transparent hover:text-white/50 text-xs sm:text-sm h-auto">
+                  <Button
+                    variant="outline"
+                    className="w-full md:w-60 justify-between font-normal border-none shadow-none text-white/70 cursor-pointer p-0! bg-transparent hover:bg-transparent hover:text-white/50 text-xs sm:text-sm h-auto"
+                  >
                     <div className="flex items-center gap-2">
                       <Users className="h-4 w-4 shrink-0" />
                       <span className="truncate">
@@ -196,62 +230,128 @@ const BookingWidget = () => {
                   <div className="space-y-4">
                     <div className="flex items-center justify-between py-1">
                       <div className="flex flex-col gap-0.5">
-                        <Label className="text-white font-semibold text-base">{t("hero.adults")}</Label>
+                        <Label className="text-white font-semibold text-base">
+                          {t("hero.adults")}
+                        </Label>
                       </div>
                       <div className="flex items-center gap-3">
                         <ButtonRounded
                           icon={<Minus className="h-4 w-4" />}
-                          onClick={() => setGuests((prev) => ({ ...prev, adultos: Math.max(0, prev.adultos - 1) }))}
+                          onClick={() =>
+                            setGuests((prev) => ({
+                              ...prev,
+                              adultos: Math.max(0, prev.adultos - 1),
+                            }))
+                          }
                           disabled={guests.adultos === 0}
                         />
-                        <span className="w-10 text-center text-white font-semibold text-lg">{guests.adultos}</span>
-                        <ButtonRounded icon={<Plus className="h-4 w-4" />} onClick={() => setGuests((prev) => ({ ...prev, adultos: prev.adultos + 1 }))} />
+                        <span className="w-10 text-center text-white font-semibold text-lg">
+                          {guests.adultos}
+                        </span>
+                        <ButtonRounded
+                          icon={<Plus className="h-4 w-4" />}
+                          onClick={() =>
+                            setGuests((prev) => ({
+                              ...prev,
+                              adultos: prev.adultos + 1,
+                            }))
+                          }
+                          disabled={totalGuests >= 10}
+                        />
                       </div>
                     </div>
                     <div className="flex items-center justify-between py-1">
                       <div className="flex flex-col gap-0.5">
-                        <Label className="text-white font-semibold text-base">{t("hero.children")}</Label>
+                        <Label className="text-white font-semibold text-base">
+                          {t("hero.children")}
+                        </Label>
                       </div>
                       <div className="flex items-center gap-3">
                         <ButtonRounded
                           icon={<Minus className="h-4 w-4" />}
-                          onClick={() => setGuests((prev) => ({ ...prev, criancas: Math.max(0, prev.criancas - 1) }))}
+                          onClick={() =>
+                            setGuests((prev) => ({
+                              ...prev,
+                              criancas: Math.max(0, prev.criancas - 1),
+                            }))
+                          }
                           disabled={guests.criancas === 0}
                         />
-                        <span className="w-10 text-center text-white font-semibold text-lg">{guests.criancas}</span>
-                        <ButtonRounded icon={<Plus className="h-4 w-4" />} onClick={() => setGuests((prev) => ({ ...prev, criancas: prev.criancas + 1 }))} />
+                        <span className="w-10 text-center text-white font-semibold text-lg">
+                          {guests.criancas}
+                        </span>
+                        <ButtonRounded
+                          icon={<Plus className="h-4 w-4" />}
+                          onClick={() =>
+                            setGuests((prev) => ({
+                              ...prev,
+                              criancas: prev.criancas + 1,
+                            }))
+                          }
+                          disabled={totalGuests >= 10}
+                        />
                       </div>
                     </div>
                     <div className="flex items-center justify-between py-1">
                       <div className="flex flex-col gap-0.5">
-                        <Label className="text-white font-semibold text-base">{t("hero.babies")}</Label>
+                        <Label className="text-white font-semibold text-base">
+                          {t("hero.babies")}
+                        </Label>
                       </div>
                       <div className="flex items-center gap-3">
                         <ButtonRounded
                           icon={<Minus className="h-4 w-4" />}
-                          onClick={() => setGuests((prev) => ({ ...prev, bebes: Math.max(0, prev.bebes - 1) }))}
+                          onClick={() =>
+                            setGuests((prev) => ({
+                              ...prev,
+                              bebes: Math.max(0, prev.bebes - 1),
+                            }))
+                          }
                           disabled={guests.bebes === 0}
                         />
-                        <span className="w-10 text-center text-white font-semibold text-lg">{guests.bebes}</span>
-                        <ButtonRounded icon={<Plus className="h-4 w-4" />} onClick={() => setGuests((prev) => ({ ...prev, bebes: prev.bebes + 1 }))} />
+                        <span className="w-10 text-center text-white font-semibold text-lg">
+                          {guests.bebes}
+                        </span>
+                        <ButtonRounded
+                          icon={<Plus className="h-4 w-4" />}
+                          onClick={() =>
+                            setGuests((prev) => ({
+                              ...prev,
+                              bebes: prev.bebes + 1,
+                            }))
+                          }
+                        />
                       </div>
                     </div>
                     <div className="flex items-center justify-between py-1">
                       <div className="flex flex-col gap-0.5">
-                        <Label className="text-white font-semibold text-base">{t("hero.animals")}</Label>
+                        <Label className="text-white font-semibold text-base">
+                          {t("hero.animals")}
+                        </Label>
                       </div>
                       <div className="flex items-center gap-3">
                         <ButtonRounded
                           icon={<Minus className="h-4 w-4" />}
-                          onClick={() => setAnimals((prev) => Math.max(0, prev - 1))}
+                          onClick={() =>
+                            setAnimals((prev) => Math.max(0, prev - 1))
+                          }
                           disabled={animals === 0}
                         />
-                        <span className="w-10 text-center text-white font-semibold text-lg">{animals}</span>
-                        <ButtonRounded icon={<Plus className="h-4 w-4" />} onClick={() => setAnimals((prev) => prev + 1)} disabled={animals > 2} />
+                        <span className="w-10 text-center text-white font-semibold text-lg">
+                          {animals}
+                        </span>
+                        <ButtonRounded
+                          icon={<Plus className="h-4 w-4" />}
+                          onClick={() => setAnimals((prev) => prev + 1)}
+                          disabled={animals > 2}
+                        />
                       </div>
                     </div>
                     <div className="bg-white/10 h-px w-full" />
-                    <Button className="w-full text-black border-0 bg-white/90 h-10 sm:h-11 hover:text-black hover:bg-white/50 font-light tracking-wider uppercase text-xs sm:text-sm cursor-pointer">
+                    <Button
+                      className="w-full text-black border-0 bg-white/90 h-10 sm:h-11 hover:text-black hover:bg-white/50 font-light tracking-wider uppercase text-xs sm:text-sm cursor-pointer"
+                      onClick={() => handleCloseConfirmModal()}
+                    >
                       {t("hero.confirm")}
                     </Button>
                   </div>

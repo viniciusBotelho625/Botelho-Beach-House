@@ -4,9 +4,52 @@ import "./globals.css";
 import { QueryProvider } from "./providers/QueryProvider";
 import { I18nProvider } from "./providers/I18nProvider";
 
+const siteUrl =
+  process.env.NEXT_PUBLIC_SITE_URL ?? "https://botelhobeachhouse.com";
+
 export const metadata: Metadata = {
-  title: "Botelho Beach House",
-  description: "Casa de locação por temporada",
+  metadataBase: new URL(siteUrl),
+  title: {
+    default: "Botelho Beach House",
+    template: "%s | Botelho Beach House",
+  },
+  description: "Casa de locação por temporada em Itanhaém, litoral paulista.",
+  alternates: {
+    canonical: "/",
+  },
+  openGraph: {
+    title: "Botelho Beach House",
+    description:
+      "Hospede-se em uma casa de praia exclusiva em Itanhaém, litoral de São Paulo.",
+    url: "/",
+    siteName: "Botelho Beach House",
+    locale: "pt_BR",
+    type: "website",
+    images: [
+      {
+        url: "/hero-beach-house.jpg",
+        width: 1200,
+        height: 630,
+        alt: "Vista da Botelho Beach House ao pôr do sol",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Botelho Beach House",
+    description: "Casa de locação por temporada em Itanhaém, litoral paulista.",
+    images: ["/hero-beach-house.jpg"],
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-image-preview": "large",
+      "max-video-preview": -1,
+    },
+  },
 };
 
 export default function RootLayout({

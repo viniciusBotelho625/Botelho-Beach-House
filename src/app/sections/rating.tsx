@@ -27,7 +27,7 @@ export function Rating() {
   } = useGoogleReviews();
 
   return (
-    <div className="min-h-[40rem] rounded-md flex flex-col antialiased items-center justify-center relative overflow-hidden bg-gray-100 py-12 sm:py-16 lg:py-20">
+    <div className="min-h-[40rem] rounded-md flex flex-col antialiased items-center justify-center relative overflow-hidden bg-gray-200 py-12 sm:py-16 lg:py-20">
       <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 mb-8 sm:mb-12">
         <div className="text-center mb-3 sm:mb-4">
           <p className="text-xs sm:text-sm uppercase tracking-wider text-blue-600 font-medium">

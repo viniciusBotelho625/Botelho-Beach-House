@@ -67,25 +67,32 @@ const Navigation = () => {
           ? "bg-[#002b36]/95 backdrop-blur-md shadow-lg"
           : "bg-transparent"
       }`}
+      aria-label="Navegação principal"
     >
       <div className="max-w-[1400px] mx-auto flex items-center justify-between">
         <div className="flex items-center gap-2 sm:gap-4 lg:gap-6">
          
           <Separator className="h-4 sm:h-5 bg-white/10 hidden sm:block" />
-          <div className="flex items-center gap-3 sm:gap-6 text-white/80 text-xs sm:text-sm font-light">
-            <button 
+          <div className="flex items-center gap-3 sm:gap-6 text-white/80 text-xs sm:text-sm font-light" aria-label="Seleção de idioma">
+            <button
+              type="button"
               onClick={() => changeLanguage('pt')}
+              aria-pressed={currentLanguage === 'pt'}
+              aria-label="Alternar idioma para português"
               className={`hover:text-white transition-colors ${
-                currentLanguage === 'pt' ? 'text-white font-semibold' : ''
+                currentLanguage === 'pt' ? 'text-white font-semibold underline underline-offset-4' : ''
               }`}
             >
               PT
             </button>
             <span className="text-white/40">|</span>
-            <button 
+            <button
+              type="button"
               onClick={() => changeLanguage('en')}
+              aria-pressed={currentLanguage === 'en'}
+              aria-label="Switch language to English"
               className={`hover:text-white transition-colors ${
-                currentLanguage === 'en' ? 'text-white font-semibold' : ''
+                currentLanguage === 'en' ? 'text-white font-semibold underline underline-offset-4' : ''
               }`}
             >
               EN
@@ -98,9 +105,12 @@ const Navigation = () => {
         </h1>
 
         <div className="flex items-center gap-4 sm:gap-8">
-          <button className="text-white/90 hover:text-white text-xs sm:text-sm font-light tracking-wider uppercase transition-colors">
+          <a
+            href="#reservation"
+            className="text-white/90 hover:text-white text-xs sm:text-sm font-light tracking-wider uppercase transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/70 focus-visible:ring-offset-2 focus-visible:ring-offset-transparent rounded"
+          >
             {t('nav.contact')}
-          </button>
+          </a>
         </div>
       </div>
     </nav>
