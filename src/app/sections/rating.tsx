@@ -27,10 +27,10 @@ export function Rating() {
   } = useGoogleReviews();
 
   return (
-    <div className="min-h-[40rem] rounded-md flex flex-col antialiased items-center justify-center relative overflow-hidden bg-gray-200 py-12 sm:py-16 lg:py-20">
+    <div className="min-h-[40rem]  flex flex-col antialiased items-center justify-center relative overflow-hidden bg-gray-200 py-16 lg:py-20">
       <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 mb-8 sm:mb-12">
         <div className="text-center mb-3 sm:mb-4">
-          <p className="text-xs sm:text-sm uppercase tracking-wider text-blue-600 font-medium">
+          <p className="text-xs sm:text-sm uppercase tracking-wider text-primary font-medium">
             {t("reviews.sectionLabel")}
           </p>
         </div>
@@ -38,7 +38,7 @@ export function Rating() {
         <div className="text-center mb-3 sm:mb-4">
           <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold">
             <span className="text-gray-900">{t("reviews.titlePrefix")}</span>
-            <span className="text-blue-600">{t("reviews.titleHighlight")}</span>
+            <span className="text-primary">{t("reviews.titleHighlight")}</span>
           </h2>
         </div>
 

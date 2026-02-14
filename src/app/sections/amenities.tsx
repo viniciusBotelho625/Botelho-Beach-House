@@ -28,7 +28,7 @@ export function Amenities() {
   ];
 
   return (
-    <section className="py-12 px-4 bg-gray-50">
+    <section className="py-16 lg:py-20 px-4 bg-gray-50">
       <div className="max-w-7xl mx-auto">
         <div className="text-center mb-12">
           <p className="text-sm uppercase tracking-wider text-primary font-medium mb-4">
@@ -41,7 +41,7 @@ export function Amenities() {
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
           {amenities.map(({ id, Icon, key, desc }) => (
-            <Card key={id} className="border-0 shadow-sm bg-white rounded-xl">
+            <Card key={id} className="border-0 shadow-sm bg-white rounded-xl py-0">
               <CardContent className="pt-8 pb-6 px-6 text-center">
                 <div className="w-20 h-20 rounded-2xl bg-gradient-ocean mx-auto flex items-center justify-center mb-6">
                   <Icon className="text-white" size={30} />

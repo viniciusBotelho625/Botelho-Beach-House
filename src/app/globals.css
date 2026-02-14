@@ -141,6 +141,10 @@
     --sidebar-ring: 180 50% 45%;
   }
 
+  html {
+    scroll-behavior: smooth;
+  }
+
   body {
     @apply bg-background text-foreground font-sans antialiased;
     font-family: 'Inter', sans-serif;
@@ -151,8 +155,14 @@
       #002b36;
   }
 
-  h1, h2, h3, h4, h5, h6 {
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
     font-family: 'Playfair Display', serif;
+    font-weight: 500;
   }
 }
 
@@ -170,27 +180,19 @@
   }
 
   .hero-overlay {
-    background: linear-gradient(
-      180deg,
-      hsl(var(--overlay-dark)) 0%,
-      hsl(200 40% 10% / 0.6) 50%,
-      hsl(var(--overlay-dark)) 100%
-    );
+    background: linear-gradient(180deg,
+        hsl(var(--overlay-dark)) 0%,
+        hsl(200 40% 10% / 0.6) 50%,
+        hsl(var(--overlay-dark)) 100%);
   }
 
   .btn-ocean {
-    @apply text-white font-semibold tracking-wide
-           transition-all duration-300 ease-out
-           hover:opacity-90 hover:shadow-lg
-           focus:ring-2 focus:ring-primary/50 focus:ring-offset-2 focus:ring-offset-background;
+    @apply text-white font-semibold tracking-wide transition-all duration-300 ease-out hover:opacity-90 hover:shadow-lg focus:ring-2 focus:ring-primary/50 focus:ring-offset-2 focus:ring-offset-background;
     background: linear-gradient(90deg, hsl(180 50% 40%), hsl(175 65% 50%));
   }
 
   .input-ocean {
-    @apply bg-input/80 border-border/50 text-foreground
-           placeholder:text-muted-foreground
-           focus:border-primary focus:ring-1 focus:ring-primary/50
-           transition-all duration-200;
+    @apply bg-input/80 border-border/50 text-foreground placeholder:text-muted-foreground focus:border-primary focus:ring-1 focus:ring-primary/50 transition-all duration-200;
   }
 
   .label-ocean {
@@ -253,8 +255,15 @@
   }
 
   @keyframes float {
-    0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-6px); }
+
+    0%,
+    100% {
+      transform: translateY(0);
+    }
+
+    50% {
+      transform: translateY(-6px);
+    }
   }
 
   .animate-float {
@@ -276,6 +285,7 @@
       opacity: 0;
       transform: translateY(20px);
     }
+
     to {
       opacity: 1;
       transform: translateY(0);

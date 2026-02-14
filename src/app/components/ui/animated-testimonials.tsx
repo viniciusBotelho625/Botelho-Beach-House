@@ -141,22 +141,22 @@ export const AnimatedTestimonials = ({
               ease: "easeInOut",
             }}
           >
-            <h3 className="text-2xl font-bold text-gray-900 md:text-3xl">
+            <h3 className="text-3xl font-bold text-gray-900 md:text-4xl">
               {testimonials[active].name}
             </h3>
-            <p className="text-sm text-primary font-medium mt-2">
+            <p className="text-md text-primary font-medium mt-2">
               {testimonials[active].designation}
             </p>
             <motion.p
               initial={{ opacity: 0, y: 8 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.25, ease: "easeOut" }}
-              className="mt-4 text-[15px] text-gray-600 leading-relaxed md:mt-6 md:text-base"
+              className="mt-4 text-[16px] text-gray-600 leading-relaxed md:mt-6 md:text-base"
             >
               {testimonials[active].quote}
             </motion.p>
           </motion.div>
-          <div className="flex gap-4 pt-8 md:pt-2">
+          <div className="flex gap-4 pt-8 md:pt-4">
             <button
               onClick={handlePrev}
               className="group/button flex h-12 w-12 items-center justify-center rounded-full bg-gray-900 cursor-pointer hover:bg-primary/90 transition-all duration-300 shadow-md hover:shadow-lg"

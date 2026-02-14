@@ -28,6 +28,7 @@ export const InfiniteMovingCards = ({
   const containerRef = React.useRef<HTMLDivElement | null>(null);
   const scrollerRef = React.useRef<HTMLUListElement | null>(null);
   const [start, setStart] = useState(false);
+  const [duplicatedItems, setDuplicatedItems] = useState(items);
 
   useEffect(() => {
     addAnimation();
@@ -35,14 +36,9 @@ export const InfiniteMovingCards = ({
 
   function addAnimation() {
     if (containerRef.current && scrollerRef.current) {
-      const scrollerContent = Array.from(scrollerRef.current.children);
-
-      scrollerContent.forEach((item) => {
-        const duplicatedItem = item.cloneNode(true);
-        if (scrollerRef.current) {
-          scrollerRef.current.appendChild(duplicatedItem);
-        }
-      });
+      // Duplicamos os itens via estado para garantir renderização correta pelo React
+      // sem manipulação direta do DOM que pode causar conflitos
+      setDuplicatedItems([...items, ...items]);
 
       getDirection();
       getSpeed();
@@ -91,7 +87,7 @@ export const InfiniteMovingCards = ({
       />
     ));
   };
-
+  /* ... utility functions ... */
   const getInitials = (name: string) => {
     return name
       .split(" ")
@@ -126,10 +122,10 @@ export const InfiniteMovingCards = ({
     >
       <style jsx>{`
         @keyframes scroll {
-          from {
+          0% {
             transform: translateX(0);
           }
-          to {
+          100% {
             transform: translateX(-50%);
           }
         }
@@ -149,14 +145,14 @@ export const InfiniteMovingCards = ({
           start ? "animate-scroll" : "",
         )}
       >
-        {items.map((item, idx) => (
+        {duplicatedItems.map((item, idx) => (
           <li
             className="relative w-[280px] sm:w-[300px] max-w-full shrink-0 rounded-xl sm:rounded-2xl border border-gray-100 p-4 sm:p-5 md:w-[360px] bg-white shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1"
             key={`${item.name}-${idx}`}
           >
-            <blockquote className="space-y-4">
+            <blockquote className="space-y-4 flex flex-col justify-between h-full">
               {/* Quote */}
-              <div className="relative">
+              <div className="relative  flex-1">
                 <svg
                   className="absolute -top-2 -left-2 w-8 h-8 text-gray-200"
                   fill="currentColor"
@@ -170,10 +166,10 @@ export const InfiniteMovingCards = ({
               </div>
 
               {/* Divider */}
-              <div className="border-t border-gray-100"></div>
+              <div className="border-t border-gray-100 "></div>
 
               {/* User Info */}
-              <div className="flex items-center justify-between">
+              <div className="flex items-center justify-between ">
                 <div className="flex items-center gap-3">
                   <div
                     className={cn(

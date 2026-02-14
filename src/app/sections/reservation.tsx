@@ -11,7 +11,7 @@ export function Reservation() {
   return (
     <section
       id="reservation"
-      className="min-h-screen min-h-dvh flex items-center justify-center px-4 py-8 sm:px-6 sm:py-12"
+      className="min-h-dvh flex items-center justify-center px-4  sm:px-6 py-16 lg:py-20"
       style={{
         background:
           "linear-gradient(180deg, hsl(200 60% 12%) 0%, hsl(200 40% 15%) 50%, hsl(200 50% 18%) 100%)",

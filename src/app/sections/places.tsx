@@ -36,14 +36,14 @@ export function Places() {
   }));
 
   return (
-    <section className=" sm:py-16 lg:py-20 bg-gradient-to-b from-white via-gray-50 to-white">
+    <section className="py-16 lg:py-20 bg-gradient-to-b from-white via-gray-50 to-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
-        <div className="text-center py-12 max-w-3xl mx-auto">
+        <div className="text-center max-w-3xl mx-auto">
           <p className="text-sm uppercase tracking-wider text-primary font-medium mb-4">
             {t("places.title")}
           </p>
-          <h2 className="text-4xl md:text-5xl font-bold mb-4 text-gray-900">
+          <h2 className="text-4xl md:text-5xl font-bold text-gray-900">
             {t("places.subtitle")}
           </h2>
         </div>

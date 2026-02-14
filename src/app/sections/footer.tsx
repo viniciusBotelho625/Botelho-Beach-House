@@ -8,7 +8,7 @@ export function Footer() {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="relative bg-[#105c74] text-white overflow-hidden">
+    <footer className="relative bg-[#002b36] text-white overflow-hidden">
       <div className="absolute top-0 left-0 right-0 w-full h-20 overflow-hidden">
         <svg
           viewBox="0 0 1440 80"
