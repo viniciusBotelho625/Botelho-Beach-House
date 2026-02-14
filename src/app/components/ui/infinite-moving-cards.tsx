@@ -28,7 +28,16 @@ export const InfiniteMovingCards = ({
   const containerRef = React.useRef<HTMLDivElement | null>(null);
   const scrollerRef = React.useRef<HTMLUListElement | null>(null);
   const [start, setStart] = useState(false);
-  const [duplicatedItems, setDuplicatedItems] = useState(items);
+
+  // Garantimos que a lista de itens seja duplicada para o efeito de loop infinito
+  const itemsToRender = React.useMemo(() => {
+    const duplicated = [...items, ...items];
+    // Se a lista for pequena, duplicamos mais uma vez para garantir que preencha a tela
+    if (duplicated.length < 10) {
+      return [...duplicated, ...duplicated];
+    }
+    return duplicated;
+  }, [items]);
 
   useEffect(() => {
     addAnimation();
@@ -36,10 +45,6 @@ export const InfiniteMovingCards = ({
 
   function addAnimation() {
     if (containerRef.current && scrollerRef.current) {
-      // Duplicamos os itens via estado para garantir renderização correta pelo React
-      // sem manipulação direta do DOM que pode causar conflitos
-      setDuplicatedItems([...items, ...items]);
-
       getDirection();
       getSpeed();
       setStart(true);
@@ -145,7 +150,7 @@ export const InfiniteMovingCards = ({
           start ? "animate-scroll" : "",
         )}
       >
-        {duplicatedItems.map((item, idx) => (
+        {itemsToRender.map((item, idx) => (
           <li
             className="relative w-[280px] sm:w-[300px] max-w-full shrink-0 rounded-xl sm:rounded-2xl border border-gray-100 p-4 sm:p-5 md:w-[360px] bg-white shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1"
             key={`${item.name}-${idx}`}
