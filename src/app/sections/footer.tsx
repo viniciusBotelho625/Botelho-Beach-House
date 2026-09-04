@@ -31,7 +31,7 @@ export function Footer() {
             <img
               src="/logo_beach_house.png"
               alt="Botelho Beach House"
-              className="w-28 mb-2"
+              className="w-54 mb-2"
             />
             <h2 className="text-2xl font-bold text-[#3fbbd0] mb-3">
               Botelho Beach House
@@ -42,30 +42,47 @@ export function Footer() {
           </div>
 
           <div className="space-y-4">
-            <h3 className="text-xl font-bold text-white mb-4">{t("footer.quickLinks")}</h3>
+            <h3 className="text-xl font-bold text-white mb-4">
+              {t("footer.quickLinks")}
+            </h3>
             <ul className="space-y-3">
               <li>
-                <a href="#inicio" className="text-white/90 hover:text-white transition-colors duration-300 text-sm">
+                <a
+                  href="#inicio"
+                  className="text-white/90 hover:text-white transition-colors duration-300 text-sm"
+                >
                   {t("footer.home")}
                 </a>
               </li>
               <li>
-                <a href="#fotos" className="text-white/90 hover:text-white transition-colors duration-300 text-sm">
+                <a
+                  href="#fotos"
+                  className="text-white/90 hover:text-white transition-colors duration-300 text-sm"
+                >
                   {t("footer.photos")}
                 </a>
               </li>
               <li>
-                <a href="#comodidades" className="text-white/90 hover:text-white transition-colors duration-300 text-sm">
+                <a
+                  href="#comodidades"
+                  className="text-white/90 hover:text-white transition-colors duration-300 text-sm"
+                >
                   {t("footer.amenities")}
                 </a>
               </li>
               <li>
-                <a href="#avaliacoes" className="text-white/90 hover:text-white transition-colors duration-300 text-sm">
+                <a
+                  href="#avaliacoes"
+                  className="text-white/90 hover:text-white transition-colors duration-300 text-sm"
+                >
                   {t("footer.reviews")}
                 </a>
               </li>
               <li>
-                <a href="#reservar" className="text-white/90 hover:text-white transition-colors duration-300 text-sm">
+                <a
+                  href="#reservar"
+                  className="text-white/90 hover:text-white transition-colors duration-300 text-sm"
+                >
                   {t("footer.reserve")}
                 </a>
               </li>
@@ -78,7 +95,7 @@ export function Footer() {
             </h3>
             <ul className="space-y-3">
               <li className="flex items-start gap-3 text-white/90 text-sm">
-                <Phone className="h-5 w-5 mt-0.5 flex-shrink-0 text-white" />
+                <Phone className="h-5 w-5 mt-0.5 shrink-0 text-white" />
                 <a
                   href="tel:+5511934905837"
                   className="hover:text-white transition-colors duration-300"
@@ -87,7 +104,7 @@ export function Footer() {
                 </a>
               </li>
               <li className="flex items-start gap-3 text-white/90 text-sm">
-                <Mail className="h-5 w-5 mt-0.5 flex-shrink-0 text-white" />
+                <Mail className="h-5 w-5 mt-0.5 shrink-0 text-white" />
                 <a
                   href="mailto:beachhousepix@gmail.com"
                   className="hover:text-white transition-colors duration-300"
@@ -96,7 +113,7 @@ export function Footer() {
                 </a>
               </li>
               <li className="flex items-start gap-3 text-white/90 text-sm">
-                <MapPin className="h-5 w-5 mt-0.5 flex-shrink-0 text-white" />
+                <MapPin className="h-5 w-5 mt-0.5 shrink-0 text-white" />
                 <span>
                   Praia Itanhaém
                   <br />
@@ -118,16 +135,21 @@ export function Footer() {
           </div>
 
           <div className="space-y-4">
-            <h3 className="text-xl font-bold text-white mb-4">{t("footer.hours")}</h3>
+            <h3 className="text-xl font-bold text-white mb-4">
+              {t("footer.hours")}
+            </h3>
             <ul className="space-y-3 text-white/90 text-sm">
               <li>
-                {t("footer.checkIn")}: <span className="text-[#3fbbd0]">09:00</span>
+                {t("footer.checkIn")}:{" "}
+                <span className="text-[#3fbbd0]">10:00</span>
               </li>
               <li>
-                {t("footer.checkOut")}: <span className="text-[#3fbbd0]">16:00</span>
+                {t("footer.checkOut")}:{" "}
+                <span className="text-[#3fbbd0]">15:00</span>
               </li>
               <li>
-                {t("footer.serviceHours")}: <span className="text-[#3fbbd0]">8h - 22h</span>
+                {t("footer.serviceHours")}:{" "}
+                <span className="text-[#3fbbd0]">9h - 22h</span>
               </li>
             </ul>
             <div className="mt-6 bg-[#3fbbd0]/20 rounded-lg p-4 border border-[#3fbbd0]/30">
