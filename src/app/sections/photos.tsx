@@ -14,93 +14,75 @@ interface GalleryImage {
 const images: GalleryImage[] = [
   {
     id: 1,
-    src:
-      "https://res.cloudinary.com/dmeglebnu/image/upload/v1769216812/IMG_1612_1_qhprv6.jpg",
+    src: "https://res.cloudinary.com/dmeglebnu/image/upload/v1788565831/89294BBE-8A73-4359-82B6-3DCD819BB47B_efz5ee.png",
   },
   {
     id: 2,
-    src:
-      "https://res.cloudinary.com/dmeglebnu/image/upload/v1769216809/IMG_5910_gpu4ha.jpg",
+    src: "https://res.cloudinary.com/dmeglebnu/image/upload/v1788565831/8310F6A6-92EB-4BA6-84BC-739081618566_je5qqc.png",
   },
   {
     id: 3,
-    src:
-      "https://res.cloudinary.com/dmeglebnu/image/upload/v1769216809/7c7435c9-20a5-40ac-8ad4-e28a775b1954_jh50v7.jpg",
+    src: " https://res.cloudinary.com/dmeglebnu/image/upload/v1788565830/IMG_8907_jwpcjw.jpg",
   },
   {
     id: 4,
-    src:
-      "https://res.cloudinary.com/dmeglebnu/image/upload/v1770737504/WhatsApp_Image_2026-02-10_at_12.27.20_1_enf3co.jpg",
+    src: "https://res.cloudinary.com/dmeglebnu/image/upload/v1788566596/b4bb867c-9718-4177-bd85-14812e8d1cd2_gjes6x.jpg",
   },
   {
     id: 5,
-    src:
-      "https://res.cloudinary.com/dmeglebnu/image/upload/v1769216811/IMG_7277_gtecis.jpg",
+    src: "https://res.cloudinary.com/dmeglebnu/image/upload/v1788565831/IMG_8928_k9xfx9.jpg",
   },
   {
     id: 6,
-    src:
-      "https://res.cloudinary.com/dmeglebnu/image/upload/v1770737502/WhatsApp_Image_2026-02-10_at_12.27.21_3_kigjuv.jpg",
+    src: "https://res.cloudinary.com/dmeglebnu/image/upload/v1788565831/88B18493-53BB-43C8-9CA3-82AE3B263968_iwrvdl.png",
   },
   {
     id: 7,
-    src:
-      "https://res.cloudinary.com/dmeglebnu/image/upload/v1769216810/IMG_3338_erzmzi.jpg",
+    src: "https://res.cloudinary.com/dmeglebnu/image/upload/v1769216810/IMG_3338_erzmzi.jpg",
   },
   {
     id: 8,
-    src:
-      "https://res.cloudinary.com/dmeglebnu/image/upload/v1770737501/WhatsApp_Image_2026-02-10_at_12.27.21_4_qjxejo.jpg",
+    src: "https://res.cloudinary.com/dmeglebnu/image/upload/v1770737501/WhatsApp_Image_2026-02-10_at_12.27.21_4_qjxejo.jpg",
   },
   {
     id: 9,
-    src:
-      "https://res.cloudinary.com/dmeglebnu/image/upload/v1769216810/IMG_3345_1_z1p1ir.jpg",
+    src: "https://res.cloudinary.com/dmeglebnu/image/upload/v1769216810/IMG_3345_1_z1p1ir.jpg",
   },
   {
     id: 10,
-    src:
-      "https://res.cloudinary.com/dmeglebnu/image/upload/v1769216813/IMG_0245_mmrvik.jpg",
+    src: "https://res.cloudinary.com/dmeglebnu/image/upload/v1769216813/IMG_0245_mmrvik.jpg",
   },
   {
     id: 11,
-    src:
-      "https://res.cloudinary.com/dmeglebnu/image/upload/v1770737506/WhatsApp_Image_2026-02-10_at_12.27.21_2_zrcyfh.jpg",
+    src: "https://res.cloudinary.com/dmeglebnu/image/upload/v1788565831/IMG_8933_e4so4t.jpg",
   },
   {
     id: 12,
-    src:
-      "https://res.cloudinary.com/dmeglebnu/image/upload/v1769216812/IMG_0663_gtlseo.jpg",
+    src: "https://res.cloudinary.com/dmeglebnu/image/upload/v1769216812/IMG_0663_gtlseo.jpg",
   },
   {
     id: 13,
-    src:
-      "https://res.cloudinary.com/dmeglebnu/image/upload/v1770737502/WhatsApp_Image_2026-02-10_at_12.27.20_2_fvvmqe.jpg",
+    src: "https://res.cloudinary.com/dmeglebnu/image/upload/v1770737502/WhatsApp_Image_2026-02-10_at_12.27.20_2_fvvmqe.jpg",
   },
   {
     id: 14,
-    src:
-      "https://res.cloudinary.com/dmeglebnu/image/upload/v1770737502/WhatsApp_Image_2026-02-10_at_12.27.20_nzdnge.jpg",
+    src: "https://res.cloudinary.com/dmeglebnu/image/upload/v1788566596/IMG_8937_fwhzzd.jpg",
   },
   {
     id: 15,
-    src:
-      "https://res.cloudinary.com/dmeglebnu/image/upload/v1769216811/IMG_0292_u4fshf.jpg",
+    src: "https://res.cloudinary.com/dmeglebnu/image/upload/v1769216811/IMG_0292_u4fshf.jpg",
   },
   {
     id: 16,
-    src:
-      "https://res.cloudinary.com/dmeglebnu/image/upload/v1769216810/acf4fe13-0181-4af3-8516-c9f4f1ab50d2_dauwgl.jpg",
+    src: "https://res.cloudinary.com/dmeglebnu/image/upload/v1769216810/acf4fe13-0181-4af3-8516-c9f4f1ab50d2_dauwgl.jpg",
   },
   {
     id: 17,
-    src:
-      "https://res.cloudinary.com/dmeglebnu/image/upload/v1769216812/IMG_3195_xaddl9.jpg",
+    src: "https://res.cloudinary.com/dmeglebnu/image/upload/v1769216812/IMG_3195_xaddl9.jpg",
   },
   {
     id: 18,
-    src:
-      "https://res.cloudinary.com/dmeglebnu/image/upload/v1770737501/WhatsApp_Image_2026-02-10_at_12.27.21_jbuqbs.jpg",
+    src: "https://res.cloudinary.com/dmeglebnu/image/upload/v1770737501/WhatsApp_Image_2026-02-10_at_12.27.21_jbuqbs.jpg",
   },
 ];
 
@@ -121,13 +103,17 @@ export function Photos() {
 
   const goToPrevious = () => {
     if (selectedImage !== null) {
-      setSelectedImage(selectedImage === 0 ? images.length - 1 : selectedImage - 1);
+      setSelectedImage(
+        selectedImage === 0 ? images.length - 1 : selectedImage - 1,
+      );
     }
   };
 
   const goToNext = () => {
     if (selectedImage !== null) {
-      setSelectedImage(selectedImage === images.length - 1 ? 0 : selectedImage + 1);
+      setSelectedImage(
+        selectedImage === images.length - 1 ? 0 : selectedImage + 1,
+      );
     }
   };
 
@@ -141,7 +127,7 @@ export function Photos() {
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-accent-foreground mb-4">
             {t("photos.subtitle")}
             <span className="text-transparent bg-clip-text bg-gradient-ocean">
-            {t("photos.subtitle2")}
+              {t("photos.subtitle2")}
             </span>
           </h2>
           <p className="text-gray-600 not-odd:text-text-lg max-w-2xl mx-auto">
@@ -155,17 +141,17 @@ export function Photos() {
             const alt = t(`photos.images.${image.id}.alt`);
 
             return (
-            <div
-              key={image.id}
-              className="group relative overflow-hidden rounded-lg cursor-pointer aspect-square bg-card"
-              onClick={() => openLightbox(index)}
-            >
-              <img
-                src={image.src}
-                alt={alt}
-                className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-              />
-              {/* <div className="absolute inset-0 bg-gradient-to-t from-ocean-deep/90 via-ocean-deep/40 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-500">
+              <div
+                key={image.id}
+                className="group relative overflow-hidden rounded-lg cursor-pointer aspect-square bg-card"
+                onClick={() => openLightbox(index)}
+              >
+                <img
+                  src={image.src}
+                  alt={alt}
+                  className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                />
+                {/* <div className="absolute inset-0 bg-gradient-to-t from-ocean-deep/90 via-ocean-deep/40 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-500">
                 <div className="absolute bottom-0 left-0 right-0 p-4 translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
                   <h3 className="text-white font-semibold text-lg">
                     {title}
@@ -173,9 +159,10 @@ export function Photos() {
                   <p className="text-foam text-sm">{alt}</p>
                 </div>
               </div> */}
-              <div className="absolute inset-0 ring-2 ring-primary/0 group-hover:ring-primary/50 transition-all duration-300 rounded-lg" />
-            </div>
-          )})}
+                <div className="absolute inset-0 ring-2 ring-primary/0 group-hover:ring-primary/50 transition-all duration-300 rounded-lg" />
+              </div>
+            );
+          })}
         </div>
 
         {images.length > 8 && (
@@ -186,7 +173,7 @@ export function Photos() {
               onClick={() => setShowAll((prev) => !prev)}
               className="bg-gradient-ocean text-white px-8 py-3 rounded-full hover:opacity-90 transition-opacit cursor-pointer"
             >
-              {showAll ?  t("photos.showMore") : t("photos.showLess")}
+              {showAll ? t("photos.showMore") : t("photos.showLess")}
             </Button>
           </div>
         )}
@@ -212,42 +199,42 @@ export function Photos() {
 
                     return (
                       <>
-                  <Button
-                    variant="ghost"
-                    size="icon"
-                    className="absolute left-4 top-1/2 -translate-y-1/2 z-10 bg-background/90 hover:bg-background text-black rounded-full"
-                    onClick={goToPrevious}
-                  >
-                    <ChevronLeft className="h-6 w-6" />
-                  </Button>
+                        <Button
+                          variant="ghost"
+                          size="icon"
+                          className="absolute left-4 top-1/2 -translate-y-1/2 z-10 bg-background/90 hover:bg-background text-black rounded-full"
+                          onClick={goToPrevious}
+                        >
+                          <ChevronLeft className="h-6 w-6" />
+                        </Button>
 
-                  <Button
-                    variant="ghost"
-                    size="icon"
-                    className="absolute right-4 top-1/2 -translate-y-1/2 z-10 bg-background/90 hover:bg-background text-black rounded-full"
-                    onClick={goToNext}
-                  >
-                    <ChevronRight className="h-6 w-6" />
-                  </Button>
+                        <Button
+                          variant="ghost"
+                          size="icon"
+                          className="absolute right-4 top-1/2 -translate-y-1/2 z-10 bg-background/90 hover:bg-background text-black rounded-full"
+                          onClick={goToNext}
+                        >
+                          <ChevronRight className="h-6 w-6" />
+                        </Button>
 
-                  <div className="p-8">
-                    <img
-                      src={current.src}
-                      alt={currentAlt}
-                      className="w-full h-auto max-h-[70vh] object-contain rounded-lg"
-                    />
-                    <div className="mt-6 text-center">
-                      {/* <h3 className="text-2xl font-semibold text-foreground mb-2">
+                        <div className="p-8">
+                          <img
+                            src={current.src}
+                            alt={currentAlt}
+                            className="w-full h-auto max-h-[70vh] object-contain rounded-lg"
+                          />
+                          <div className="mt-6 text-center">
+                            {/* <h3 className="text-2xl font-semibold text-foreground mb-2">
                         {currentTitle}
                       </h3>
                       <p className="text-muted-foreground">
                         {currentAlt}
                       </p> */}
-                      <p className="text-sm text-muted-foreground mt-2">
-                        {selectedImage + 1} / {images.length}
-                      </p>
-                    </div>
-                  </div>
+                            <p className="text-sm text-muted-foreground mt-2">
+                              {selectedImage + 1} / {images.length}
+                            </p>
+                          </div>
+                        </div>
                       </>
                     );
                   })()}
@@ -260,7 +247,6 @@ export function Photos() {
     </section>
   );
 }
-
 
 // "use client";
 // import { LayoutGrid } from "../components/ui/layout-grid";

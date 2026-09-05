@@ -26,12 +26,12 @@ export function Footer() {
       </div>
 
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-16 sm:pt-20 pb-6 sm:pb-8">
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 sm:gap-10 lg:gap-12 mb-8 sm:mb-12">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 sm:gap-10 lg:gap-14 mb-8 sm:mb-12">
           <div className="space-y-4">
             <img
               src="/logo_beach_house.png"
               alt="Botelho Beach House"
-              className="w-54 mb-2"
+              className="w-60 mb-2"
             />
             <h2 className="text-2xl font-bold text-[#3fbbd0] mb-3">
               Botelho Beach House
@@ -39,54 +39,6 @@ export function Footer() {
             <p className="text-white/90 leading-relaxed text-sm">
               {t("footer.tagline")}
             </p>
-          </div>
-
-          <div className="space-y-4">
-            <h3 className="text-xl font-bold text-white mb-4">
-              {t("footer.quickLinks")}
-            </h3>
-            <ul className="space-y-3">
-              <li>
-                <a
-                  href="#inicio"
-                  className="text-white/90 hover:text-white transition-colors duration-300 text-sm"
-                >
-                  {t("footer.home")}
-                </a>
-              </li>
-              <li>
-                <a
-                  href="#fotos"
-                  className="text-white/90 hover:text-white transition-colors duration-300 text-sm"
-                >
-                  {t("footer.photos")}
-                </a>
-              </li>
-              <li>
-                <a
-                  href="#comodidades"
-                  className="text-white/90 hover:text-white transition-colors duration-300 text-sm"
-                >
-                  {t("footer.amenities")}
-                </a>
-              </li>
-              <li>
-                <a
-                  href="#avaliacoes"
-                  className="text-white/90 hover:text-white transition-colors duration-300 text-sm"
-                >
-                  {t("footer.reviews")}
-                </a>
-              </li>
-              <li>
-                <a
-                  href="#reservar"
-                  className="text-white/90 hover:text-white transition-colors duration-300 text-sm"
-                >
-                  {t("footer.reserve")}
-                </a>
-              </li>
-            </ul>
           </div>
 
           <div className="space-y-4">
